@@ -1,6 +1,7 @@
 package edu.akdeniz.softeng.survey.controller;
 
 import edu.akdeniz.softeng.survey.constant.Constants;
+import org.springframework.boot.web.servlet.error.ErrorController;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 @Controller
-public class ExceptionHandlingController implements org.springframework.boot.autoconfigure.web.ErrorController {
+public class ExceptionHandlingController implements ErrorController {
 
     @RequestMapping(value = Constants.SurveyPageURL.ERROR_URI)
     private String error(HttpServletRequest request, HttpServletResponse response, HttpSession session, Model model) {
@@ -21,7 +22,7 @@ public class ExceptionHandlingController implements org.springframework.boot.aut
         model.addAttribute("wait_verify", false);
         /**/
         switch (response.getStatus()) {
-            
+
             // not found
             case 404:
                 return "404";
