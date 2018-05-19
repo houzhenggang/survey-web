@@ -12,6 +12,8 @@ public class Question {
     private int questionId;
     private int surveyId;
     private String questionText;
-    private QuestionType questionType;
+    private String questionType;
+
+
 
 }

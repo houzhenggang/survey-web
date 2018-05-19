@@ -1,9 +1,11 @@
 package edu.akdeniz.softeng.survey.entity;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.Date;
 
+@Document(collection = "sequence")
 public class Survey {
 
     @Id
@@ -12,13 +14,7 @@ public class Survey {
     private boolean active;
     private Date createDate;
 
-    public Survey(){
-
-    }
-
-    public Survey(int surveyId, String name) {
-        this.surveyId = surveyId;
-        this.name = name;
+    public Survey() {
         this.active = true;
         this.createDate = new Date();
     }

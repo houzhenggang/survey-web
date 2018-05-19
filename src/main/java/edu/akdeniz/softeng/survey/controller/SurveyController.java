@@ -5,11 +5,13 @@ import edu.akdeniz.softeng.survey.repository.SurveyRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
 
-@Controller("/survey")
+@Controller
+@RequestMapping("/survey")
 public class SurveyController {
 
     @Autowired
@@ -24,18 +26,20 @@ public class SurveyController {
         Survey survey;
 
         // ...
-        survey = new Survey(1, "Survey1");
+        survey = new Survey();
+        survey.setName("Survey1");
         repository.save(survey);
 
         // ...
-        survey = new Survey(2, "Survey2");
+        survey = new Survey();
+        survey.setName("Survey2");
         repository.save(survey);
 
         return repository.findAll();
     }
 
-    @GetMapping("/list")
     @ResponseBody
+    @GetMapping("/list")
     public List<Survey> getSurveyList() {
         return repository.findAll();
     }
