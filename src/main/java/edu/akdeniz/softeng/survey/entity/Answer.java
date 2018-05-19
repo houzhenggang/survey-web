@@ -1,11 +1,19 @@
 package edu.akdeniz.softeng.survey.entity;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
+@Document
 public class Answer {
 
-    @Id
-    private int answerId;
-    private int questionId;
     private String answerText;
+
+
+    public String getAnswerText() {
+        return answerText;
+    }
+
+    public void setAnswerText(String answerText) {
+        this.answerText = answerText;
+    }
 }
