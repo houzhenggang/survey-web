@@ -6,12 +6,13 @@ import edu.akdeniz.softeng.survey.entity.Survey;
 import edu.akdeniz.softeng.survey.repository.SurveyRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 
+import javax.swing.text.html.Option;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/survey")
@@ -19,6 +20,12 @@ public class SurveyController {
 
     @Autowired
     private SurveyRepo repository;
+
+    //survey list, create, save, show, delete, edit, update, takesurvey is created
+
+    // {"_id": "q1", "type": "question",
+    // "type": "multiplechoice", "question": "Best team?", "answers": ["Galatasaray", "Fenerbahçe", "Beşiktaş"]},
+
 
     @ResponseBody
     @GetMapping("/reset")
@@ -54,14 +61,14 @@ public class SurveyController {
 
         // ...
         survey = new Survey();
-        survey.setName("Survey1");
-        survey.setQuestionList(Arrays.asList(q1, q2));
+        survey.setSurveyDescription("Survey1");
+        survey.setSurveyQuestions(Arrays.asList(q1, q2));
         repository.save(survey);
 
         // ...
         survey = new Survey();
-        survey.setName("Survey2");
-        survey.setQuestionList(Arrays.asList(q1, q2));
+        survey.setSurveyDescription("Survey2");
+        survey.setSurveyQuestions(Arrays.asList(q1, q2));
         repository.save(survey);
 
         return repository.findAll();
@@ -73,4 +80,36 @@ public class SurveyController {
     public List<Survey> getSurveyList() {
         return repository.findAll();
     }
+
+
+    // .......................................
+
+    // TODO : no need
+
+    @ResponseBody
+    @RequestMapping("/create")
+    public String create() {
+        // TODO : parameters? returns what?
+        return "create";
+    }
+
+
+    @ResponseBody
+    @RequestMapping("/save")
+    public String save(@RequestBody Survey survey) {
+        // TODO : update vs save
+        return survey.getSurveyId();
+    }
+
+    @ResponseBody
+    @RequestMapping("/show/{id}")
+    public Survey show(@PathVariable String id) {
+        return repository.findById(id).orElse(null);
+    }
+
+    // TODO : take survey ??
+
+    // TODO : delete survey ??
+
+    // TODO : edit survey??
 }

@@ -8,7 +8,6 @@ public class Answer {
 
     private String answerText;
 
-
     public String getAnswerText() {
         return answerText;
     }

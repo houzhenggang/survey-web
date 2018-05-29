@@ -16,17 +16,20 @@ public class Survey {
 
     @Id
     private String surveyId;
-    private String name;
-    private boolean active;
+    private String surveyTitle;
+    private String surveyDescription;
+    private List<Question> surveyQuestions;
+    private boolean isActive;
     private Date createDate;
+    private String authorId;
 
-    private List<Question> questionList;
 
     public Survey() {
-        this.active = true;
+        this.isActive = true;
         this.createDate = new Date();
-        this.questionList = new NotNullList<>();
+        this.surveyQuestions = new NotNullList<>();
     }
+
 
     public String getSurveyId() {
         return surveyId;
@@ -36,35 +39,53 @@ public class Survey {
         this.surveyId = surveyId;
     }
 
-    public String getName() {
-        return name;
+    public String getSurveyTitle() {
+        return surveyTitle;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setSurveyTitle(String surveyTitle) {
+        this.surveyTitle = surveyTitle;
+    }
+
+    public String getSurveyDescription() {
+        return surveyDescription;
+    }
+
+    public void setSurveyDescription(String surveyDescription) {
+        this.surveyDescription = surveyDescription;
+    }
+
+    public List<Question> getSurveyQuestions() {
+        return surveyQuestions;
+    }
+
+    public void setSurveyQuestions(List<Question> surveyQuestions) {
+        this.surveyQuestions = new NotNullList<>(surveyQuestions);
     }
 
     public boolean isActive() {
-        return active;
+        return isActive;
     }
 
     public void setActive(boolean active) {
-        this.active = active;
+        isActive = active;
     }
 
+
     public String getCreateDate() {
-        return DateTimeHelper.getTheDateInString(createDate);
+        return DateTimeHelper.getTheDateInString(DateTimeHelper.DateFormat.MYSQL, createDate);
     }
 
     public void setCreateDate(Date createDate) {
         this.createDate = createDate;
     }
 
-    public List<Question> getQuestionList() {
-        return questionList;
+
+    public String getAuthorId() {
+        return authorId;
     }
 
-    public void setQuestionList(Collection<Question> questionList) {
-        this.questionList = new NotNullList<>(questionList);
+    public void setAuthorId(String authorId) {
+        this.authorId = authorId;
     }
 }
