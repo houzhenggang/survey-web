@@ -94,15 +94,7 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-mongodb</artifactId>
         </dependency>
-
-        <!-- Helper Project -->
-        <dependency>
-            <groupId>com.maemresen</groupId>
-            <artifactId>jutils</artifactId>
-            <version>1.0.0</version>
-            <systemPath>${basedir}/bin/jutils-1.0.0.jar</systemPath>
-        </dependency>
-
+        
         <dependency>
             <groupId>edu.akdeniz.softeng</groupId>
             <artifactId>logging</artifactId>

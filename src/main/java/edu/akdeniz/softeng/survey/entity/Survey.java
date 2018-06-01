@@ -1,11 +1,10 @@
 package edu.akdeniz.softeng.survey.entity;
 
-import com.maemresen.jutils.collections.NotNullList;
-import com.maemresen.jutils.helper.DateTimeHelper;
+import edu.akdeniz.softeng.survey.DateTimeHelper;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.util.Collection;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -27,7 +26,7 @@ public class Survey {
     public Survey() {
         this.isActive = true;
         this.createDate = new Date();
-        this.surveyQuestions = new NotNullList<>();
+        this.surveyQuestions = new ArrayList<>();
     }
 
 
@@ -60,7 +59,7 @@ public class Survey {
     }
 
     public void setSurveyQuestions(List<Question> surveyQuestions) {
-        this.surveyQuestions = new NotNullList<>(surveyQuestions);
+        this.surveyQuestions = new ArrayList<>(surveyQuestions);
     }
 
     public boolean isActive() {
