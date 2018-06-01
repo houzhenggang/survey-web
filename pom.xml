@@ -3,6 +3,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
+
     <groupId>edu.akdeniz.softeng</groupId>
     <artifactId>survey</artifactId>
     <version>0.0.1</version>
@@ -21,7 +22,7 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <java.version>1.10</java.version>
+        <java.version>1.8</java.version>
     </properties>
 
     <dependencies>
@@ -100,6 +101,12 @@
             <artifactId>jutils</artifactId>
             <version>1.0.0</version>
             <systemPath>${basedir}/bin/jutils-1.0.0.jar</systemPath>
+        </dependency>
+
+        <dependency>
+            <groupId>edu.akdeniz.softeng</groupId>
+            <artifactId>logging</artifactId>
+            <version>1.0.0</version>
         </dependency>
 
     </dependencies>

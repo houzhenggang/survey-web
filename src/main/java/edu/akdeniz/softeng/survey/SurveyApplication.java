@@ -1,7 +1,7 @@
 
 package edu.akdeniz.softeng.survey;
 
-import org.springframework.beans.factory.annotation.Value;
+import edu.akdeniz.softeng.logging.LoggerWrapper;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
@@ -13,6 +13,8 @@ import org.springframework.context.ConfigurableApplicationContext;
 public class SurveyApplication {
 
     public static void main(String[] args) {
+        LoggerWrapper wrapper = new LoggerWrapper(SurveyApplication.class);
+        wrapper.info("Hi From Spring");
         // TODO : ...
         ConfigurableApplicationContext contx = SpringApplication.run(SurveyApplication.class, args);
     }
