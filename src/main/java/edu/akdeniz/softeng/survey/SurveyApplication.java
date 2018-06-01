@@ -13,8 +13,6 @@ import org.springframework.context.ConfigurableApplicationContext;
 public class SurveyApplication {
 
     public static void main(String[] args) {
-        LoggerWrapper wrapper = new LoggerWrapper(SurveyApplication.class);
-        wrapper.info("Hi From Spring");
         // TODO : ...
         ConfigurableApplicationContext contx = SpringApplication.run(SurveyApplication.class, args);
     }
