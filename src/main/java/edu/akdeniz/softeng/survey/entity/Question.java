@@ -1,9 +1,8 @@
 package edu.akdeniz.softeng.survey.entity;
 
-import com.maemresen.jutils.collections.NotNullList;
-import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -20,7 +19,7 @@ public class Question {
     private List<Answer> answerList;
 
     public Question() {
-        answerList = new NotNullList<>();
+        answerList = new ArrayList<>();
     }
 
 
@@ -53,6 +52,6 @@ public class Question {
     }
 
     public void setAnswerList(Collection<Answer> answerList) {
-        this.answerList = new NotNullList<Answer>(answerList);
+        this.answerList = new ArrayList<Answer>(answerList);
     }
 }

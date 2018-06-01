@@ -94,7 +94,7 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-mongodb</artifactId>
         </dependency>
-        
+
         <dependency>
             <groupId>edu.akdeniz.softeng</groupId>
             <artifactId>logging</artifactId>
