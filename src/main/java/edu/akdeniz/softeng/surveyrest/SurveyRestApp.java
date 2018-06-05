@@ -12,3 +12,4 @@ public class SurveyRestApp {
         SpringApplication.run(SurveyRestApp.class, args);
     }
 }
+
