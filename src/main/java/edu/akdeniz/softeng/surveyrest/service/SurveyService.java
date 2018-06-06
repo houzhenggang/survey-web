@@ -1,5 +1,6 @@
 package edu.akdeniz.softeng.surveyrest.service;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.maemresen.jutils.collections.NotNullList;
 import edu.akdeniz.softeng.surveyrest.entity.Answer;
 import edu.akdeniz.softeng.surveyrest.entity.Question;
@@ -35,12 +36,18 @@ public class SurveyService {
         survey.setDescription("Survey Description");
 
         Question q1 = new Question();
-        q1.setType("single");
+        q1.setType("singleLine");
+        q1.setTitle("Would you like to add something?");
+        q1.setHint("it could be better, if...");
 
+
+        ObjectMapper mappr = new ObjectMapper();
 
         Question q2 = new Question();
+
+
         Question q3 = new Question();
-        
+
         return repository.findAll();
     }
 
