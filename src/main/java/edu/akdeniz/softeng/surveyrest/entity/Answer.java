@@ -7,18 +7,30 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 
 
-*/
+ */
 
 @Document
 public class Answer {
 
-    private String answerText;
+    private String id;
+    private String content;
 
-    public String getAnswerText() {
-        return answerText;
+    public Answer() {
     }
 
-    public void setAnswerText(String answerText) {
-        this.answerText = answerText;
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
     }
 }

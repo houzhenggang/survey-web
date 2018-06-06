@@ -1,5 +1,6 @@
 package edu.akdeniz.softeng.surveyrest.entity;
 
+import com.maemresen.jutils.collections.NotNullList;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.ArrayList;
@@ -9,49 +10,54 @@ import java.util.List;
 @Document
 public class Question {
 
-    public enum QuestionType {
-        SINGLE_ANSWER, MULTI_ANSWER, NONE
-    }
 
-    private String questionText;
-    private String questionType;
-
-    private List<Answer> answerList;
+    private String id;
+    private String type;
+    private String title;
+    private String hint;
+    private List<Answer> choices;
 
     public Question() {
-        answerList = new ArrayList<>();
+        choices = new NotNullList<>();
     }
 
-
-    public void setAnswerList(List<Answer> answerList) {
-        this.answerList = answerList;
+    public String getId() {
+        return id;
     }
 
-    public String getQuestionText() {
-        return questionText;
+    public void setId(String id) {
+        this.id = id;
     }
 
-    public void setQuestionText(String questionText) {
-        this.questionText = questionText;
+    public String getType() {
+        return type;
     }
 
-    public QuestionType getQuestionType() {
-        if (questionType == null) {
-            return QuestionType.NONE;
-        }
-        return QuestionType.valueOf(questionType);
+    public void setType(String type) {
+        this.type = type;
     }
 
-
-    public void setQuestionType(QuestionType questionType) {
-        this.questionType = questionType.name();
+    public String getTitle() {
+        return title;
     }
 
-    public List<Answer> getAnswerList() {
-        return answerList;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
-    public void setAnswerList(Collection<Answer> answerList) {
-        this.answerList = new ArrayList<Answer>(answerList);
+    public String getHint() {
+        return hint;
+    }
+
+    public void setHint(String hint) {
+        this.hint = hint;
+    }
+
+    public List<Answer> getChoices() {
+        return choices;
+    }
+
+    public void setChoices(List<Answer> choices) {
+        this.choices = new NotNullList<>(choices);
     }
 }

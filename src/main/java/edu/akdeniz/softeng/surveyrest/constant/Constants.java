@@ -24,31 +24,6 @@ public class Constants {
 
     }
 
-
-    private final static Map<Class<?>, ParameterizedTypeReference> typeReferences;
-
-    static {
-        typeReferences = new HashMap<>();
-        setTypeReferences();
-    }
-
-    /**
-     * Here are the Response Wrapper Actual Types...
-     */
-    private static void setTypeReferences() {
-        typeReferences.put(CustomSurveyList.class, new ParameterizedTypeReference<CustomSurveyList>() {
-        });
-        typeReferences.put(Survey.class, new ParameterizedTypeReference<Survey>() {
-        });
-    }
-
-    /* */
-
-    public static ParameterizedTypeReference getTypeReference(Class<?> clazz) {
-        return typeReferences.get(clazz);
-    }
-
-
     // ...
     public static final String ERROR_URI = "/error";
 

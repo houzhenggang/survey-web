@@ -1,10 +1,10 @@
 package edu.akdeniz.softeng.surveyrest.entity;
 
+import com.maemresen.jutils.collections.NotNullList;
 import com.maemresen.jutils.helper.DateTimeHelper;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -12,76 +12,70 @@ import java.util.List;
 @Document
 public class Survey {
 
-
     @Id
     private String surveyId;
-    private String surveyTitle;
-    private List<Question> surveyQuestions;
-    private boolean isActive;
+    private String title;
+    private String description;
+    private List<Question> questions;
     private Date createDate;
-    private String authorId;
-
+    private List<String> order;
 
     public Survey() {
-        this.isActive = true;
-        this.createDate = new Date();
-        this.surveyQuestions = new ArrayList<>();
+        this.createDate = DateTimeHelper.getCurrentDay();
+        this.questions = new NotNullList<>();
+        this.order = new NotNullList<>();
     }
-
 
     public String getSurveyId() {
         return surveyId;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public void setSurveyId(String surveyId) {
         this.surveyId = surveyId;
     }
 
-    public String getSurveyTitle() {
-        return surveyTitle;
+    public String getDescription() {
+        return description;
     }
 
-    public void setSurveyTitle(String surveyTitle) {
-        this.surveyTitle = surveyTitle;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
-
-    public List<Question> getSurveyQuestions() {
-        return surveyQuestions;
+    public List<Question> getQuestions() {
+        return questions;
     }
 
-    public void setSurveyQuestions(List<Question> surveyQuestions) {
-        this.surveyQuestions = new ArrayList<>(surveyQuestions);
+    public void setQuestions(List<Question> questions) {
+        this.questions = new NotNullList<>(questions);
     }
 
-    public boolean isActive() {
-        return isActive;
-    }
-
-    public void setActive(boolean active) {
-        isActive = active;
-    }
-
-
-    public String getCreateDate() {
-        return DateTimeHelper.getTheDateInString(DateTimeHelper.DateFormat.MYSQL, createDate);
+    public Date getCreateDate() {
+        return createDate;
     }
 
     public void setCreateDate(Date createDate) {
         this.createDate = createDate;
     }
 
-
-    public String getAuthorId() {
-        return authorId;
+    public List<String> getOrder() {
+        return order;
     }
 
-    public void setAuthorId(String authorId) {
-        this.authorId = authorId;
+    public void setOrder(List<String> order) {
+        this.order = new NotNullList<>(order);
     }
 
     @Override
     public String toString() {
-        return getSurveyTitle() + " with id=[" + getSurveyId() + "]";
+        return getDescription() + " with id=[" + getSurveyId() + "]";
     }
 }

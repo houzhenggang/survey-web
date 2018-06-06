@@ -23,6 +23,12 @@ public class SurveyController {
 
 
     @ResponseBody
+    @GetMapping("/survey/reset")
+    public List<Survey> reset() {
+        return surveyService.testDB();
+    }
+
+    @ResponseBody
     @GetMapping(API.SURVEY_LIST_SERVICE_URL)
     public List<Survey> getSurveyList() {
         return surveyService.getSurveyList();
