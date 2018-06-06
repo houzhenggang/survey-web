@@ -16,7 +16,6 @@ public class Survey {
     @Id
     private String surveyId;
     private String surveyTitle;
-    private String surveyDescription;
     private List<Question> surveyQuestions;
     private boolean isActive;
     private Date createDate;
@@ -46,13 +45,6 @@ public class Survey {
         this.surveyTitle = surveyTitle;
     }
 
-    public String getSurveyDescription() {
-        return surveyDescription;
-    }
-
-    public void setSurveyDescription(String surveyDescription) {
-        this.surveyDescription = surveyDescription;
-    }
 
     public List<Question> getSurveyQuestions() {
         return surveyQuestions;
@@ -86,5 +78,10 @@ public class Survey {
 
     public void setAuthorId(String authorId) {
         this.authorId = authorId;
+    }
+
+    @Override
+    public String toString() {
+        return getSurveyTitle() + " with id=[" + getSurveyId() + "]";
     }
 }

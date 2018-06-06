@@ -1,6 +1,5 @@
 package edu.akdeniz.softeng.surveyrest.config.auth;
 
-import edu.akdeniz.softeng.surveyrest.constant.Constants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -12,6 +11,8 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.AuthenticationEntryPoint;
+
+import edu.akdeniz.softeng.surveyrest.constant.Constants.Credentials;
 
 @Configuration
 @EnableWebSecurity
@@ -42,9 +43,7 @@ public class WebSecurityConf extends WebSecurityConfigurerAdapter {
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        String userName = Constants.USER_NAME;
-        String encryptedPassword = this.passwordEncoder().encode(Constants.USER_PASSWORD);
-        UserDetails user = User.withUsername(userName).password(encryptedPassword).roles("USER").build();
+        UserDetails user = User.withUsername(Credentials.USER_NAME).password(Credentials.ENCRYPTED_USER_PASS).roles("USER").build();
         auth.inMemoryAuthentication().withUser(user);
     }
 }
