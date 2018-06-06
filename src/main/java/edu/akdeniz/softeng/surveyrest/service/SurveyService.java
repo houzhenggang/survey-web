@@ -28,6 +28,10 @@ public class SurveyService {
     // {"_id": "q1", "type": "question",
     // "type": "multiplechoice", "question": "Best team?", "answers": ["Galatasaray", "Fenerbahçe", "Beşiktaş"]},
 
+    public Survey getDummySurvey() {
+        return new Survey();
+    }
+
 
     public List<Survey> testDB() {
         repository.deleteAll();

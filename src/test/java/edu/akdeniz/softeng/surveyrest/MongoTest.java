@@ -34,7 +34,6 @@ public class MongoTest {
     @Test
     public void InsertTest() {
         ConsoleHelper.printAction(() -> {
-
             Survey survey = surveyService.getDummySurvey();
             // inserting
             surveyService.save(survey);
@@ -46,7 +45,6 @@ public class MongoTest {
             surveyService.delete(survey);
             System.out.println(survey + " deleted successfully");
             listResults();
-
         }, "Insert Test");
     }
 
