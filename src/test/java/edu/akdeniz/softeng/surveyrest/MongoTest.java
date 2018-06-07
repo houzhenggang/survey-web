@@ -32,7 +32,7 @@ public class MongoTest {
     private SurveyService surveyService;
 
     @Test
-    public void InsertTest() {
+    public void CRUDTest() {
         ConsoleHelper.printAction(() -> {
             Survey survey = surveyService.getDummySurvey();
             // inserting
@@ -40,14 +40,22 @@ public class MongoTest {
             System.out.println(survey + " saved successfully");
             listResults();
 
+            // update
+            survey.setTitle("UpdatedTitle");
+            surveyService.save(survey);
+            System.out.println(survey + " updated successfully");
+            listResults();
+
             // deleting
             ConsoleHelper.startSection("Deleting Dummy Content");
             surveyService.delete(survey);
             System.out.println(survey + " deleted successfully");
             listResults();
-        }, "Insert Test");
+        }, "CRUD Test");
     }
 
+
+    // Helper
     private void listResults() {
         // listing
         ConsoleHelper.startSection("List Results");
