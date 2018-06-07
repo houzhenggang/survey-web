@@ -41,7 +41,7 @@ public class SurveyController {
 
     @ResponseBody
     @RequestMapping(API.SURVEY_CREATE_SERVICE_URL)
-    public Survey create() {
+    public Survey create(@RequestBody Survey survey) {
         // TODO : parameters? returns what?
         return new Survey();
     }

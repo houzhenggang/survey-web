@@ -29,7 +29,10 @@ public class SurveyService {
     // "type": "multiplechoice", "question": "Best team?", "answers": ["Galatasaray", "Fenerbahçe", "Beşiktaş"]},
 
     public Survey getDummySurvey() {
-        return new Survey();
+        Survey temp = new Survey();
+        temp.setTitle("DummySurvey1");
+        temp.setDescription("DummyDescription1");
+        return temp;
     }
 
 

@@ -76,6 +76,6 @@ public class Survey {
 
     @Override
     public String toString() {
-        return getDescription() + " with id=[" + getSurveyId() + "]";
+        return getTitle() + " with id=[" + getSurveyId() + "]";
     }
 }
