@@ -40,7 +40,7 @@ public class SurveyController {
     // TODO : no need
 
     @ResponseBody
-    @RequestMapping(API.SURVEY_CREATE_SERVICE_URL)
+    @GetMapping(API.SURVEY_CREATE_SERVICE_URL)
     public Survey create(@RequestBody Survey survey) {
         // TODO : parameters? returns what?
         return new Survey();
@@ -48,14 +48,14 @@ public class SurveyController {
 
 
     @ResponseBody
-    @RequestMapping(API.SURVEY_SAVE_SERVICE_URL)
+    @GetMapping(API.SURVEY_SAVE_SERVICE_URL)
     public Survey save(@RequestBody Survey survey) {
         // TODO : update vs save
         return surveyService.save(survey);
     }
 
     @ResponseBody
-    @RequestMapping(API.SURVEY_SHOW_SERVICE_URL)
+    @GetMapping(API.SURVEY_SHOW_SERVICE_URL)
     public Survey show(@RequestParam String surveyId) {
         return surveyService.show(surveyId);
     }

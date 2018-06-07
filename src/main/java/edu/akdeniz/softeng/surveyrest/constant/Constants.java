@@ -29,8 +29,8 @@ public class Constants {
 
     /* API Credentials */
     public static class Credentials {
-        public static final String USER_NAME = "sdfhleos";
-        public static final String USER_PASS = "ed287b2e-4d84-4b1c-89c5-ae6bf320d092";
+        public static final String USER_NAME = "emre";
+        public static final String USER_PASS = "emre123";
         public static final String ENCRYPTED_USER_PASS = getEncoder().encode(USER_PASS);
         /**
          * Credentials for rest-service and CBARest...

@@ -20,7 +20,6 @@ public class ExceptionHandlingController implements ErrorController {
         // Spring.
         // Here we just define response body.
 
-        model.addAttribute("wait_verify", false);
         /**/
         switch (response.getStatus()) {
 
