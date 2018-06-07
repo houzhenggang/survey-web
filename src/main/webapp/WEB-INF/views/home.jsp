@@ -1,3 +1,3 @@
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
 
-SPRING ELDEN GİDİYEAAHHH !
+Welcome to the Survey Homepage !
