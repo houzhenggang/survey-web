@@ -1,49 +1,47 @@
 package edu.akdeniz.softeng.surveyrest.config.auth;
 
+import java.util.Arrays;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.AuthenticationProvider;
+import org.springframework.security.authentication.ProviderManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.web.AuthenticationEntryPoint;
-
-import edu.akdeniz.softeng.surveyrest.constant.Constants.Credentials;
+import org.springframework.security.ldap.authentication.ad.ActiveDirectoryLdapAuthenticationProvider;
 
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConf extends WebSecurityConfigurerAdapter {
 
-    private final AuthenticationEntryPoint authEntryPoint;
+	private String AD_DOMAIN = "bim.akdeniz.edu.tr";
+	private String AD_URL = "ldap://10.44.0.5:389";
 
-    @Autowired
-    public WebSecurityConf(AuthenticationEntryPoint authEntryPoint) {
-        this.authEntryPoint = authEntryPoint;
-    }
+	   @Override
+	    protected void configure(HttpSecurity http) throws Exception {
+	        http.authorizeRequests().anyRequest().authenticated().and().httpBasic();
+	    }
 
-    @Override
-    protected void configure(HttpSecurity http) throws Exception {
-        http.csrf().disable();
+	    @Override
+	    protected void configure(AuthenticationManagerBuilder authManagerBuilder) throws Exception {
+	        authManagerBuilder.authenticationProvider(activeDirectoryLdapAuthenticationProvider()).userDetailsService(userDetailsService());
+	    }
 
-        // All requests send to the Web Server request must be authenticated
-        http.authorizeRequests().anyRequest().authenticated();
+	    @Bean
+	    public AuthenticationManager authenticationManager() {
+	        return new ProviderManager(Arrays.asList(activeDirectoryLdapAuthenticationProvider()));
+	    }
+	    @Bean
+	    public AuthenticationProvider activeDirectoryLdapAuthenticationProvider() {
+	        ActiveDirectoryLdapAuthenticationProvider provider = new ActiveDirectoryLdapAuthenticationProvider(AD_DOMAIN, AD_URL);
+	        provider.setConvertSubErrorCodesToExceptions(true);
+	        provider.setUseAuthenticationRequestCredentials(true);
 
-        // Use AuthenticationEntryPoint to authenticate user/password
-        http.httpBasic().authenticationEntryPoint(authEntryPoint);
-    }
-
-    @Bean
-    public BCryptPasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
-
-    @Autowired
-    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        UserDetails user = User.withUsername(Credentials.USER_NAME).password(Credentials.ENCRYPTED_USER_PASS).roles("USER").build();
-        auth.inMemoryAuthentication().withUser(user);
-    }
+	        return provider;
+	    }
+	
 }
