@@ -28,7 +28,6 @@ import static org.springframework.security.test.web.servlet.request.SecurityMock
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @AutoConfigureMockMvc
-
 public class APITest {
 
     @Autowired
