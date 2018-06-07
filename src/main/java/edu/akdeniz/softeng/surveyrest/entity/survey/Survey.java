@@ -1,4 +1,4 @@
-package edu.akdeniz.softeng.surveyrest.entity;
+package edu.akdeniz.softeng.surveyrest.entity.survey;
 
 import com.maemresen.jutils.collections.NotNullList;
 import com.maemresen.jutils.helper.DateTimeHelper;
@@ -16,14 +16,13 @@ public class Survey {
     private String surveyId;
     private String title;
     private String description;
-    private List<Question> questions;
     private Date createDate;
-    private List<String> order;
+    private List<Question> questions;
+
 
     public Survey() {
         this.createDate = DateTimeHelper.getCurrentDay();
         this.questions = new NotNullList<>();
-        this.order = new NotNullList<>();
     }
 
     public String getSurveyId() {
@@ -50,6 +49,16 @@ public class Survey {
         this.description = description;
     }
 
+
+    public String getCreateDate() {
+        return DateTimeHelper.getTheDateInString(DateTimeHelper.DateFormat.MYSQL, createDate);
+    }
+
+    public void setCreateDate(Date createDate) {
+        this.createDate = createDate;
+    }
+
+
     public List<Question> getQuestions() {
         return questions;
     }
@@ -58,21 +67,6 @@ public class Survey {
         this.questions = new NotNullList<>(questions);
     }
 
-    public Date getCreateDate() {
-        return createDate;
-    }
-
-    public void setCreateDate(Date createDate) {
-        this.createDate = createDate;
-    }
-
-    public List<String> getOrder() {
-        return order;
-    }
-
-    public void setOrder(List<String> order) {
-        this.order = new NotNullList<>(order);
-    }
 
     @Override
     public String toString() {

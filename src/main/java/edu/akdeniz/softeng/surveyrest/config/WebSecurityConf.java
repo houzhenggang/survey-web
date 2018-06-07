@@ -1,4 +1,4 @@
-package edu.akdeniz.softeng.surveyrest.config.auth;
+package edu.akdeniz.softeng.surveyrest.config;
 
 import edu.akdeniz.softeng.surveyrest.constant.Constants;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +30,7 @@ public class WebSecurityConf extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
 
         http.authorizeRequests()
-                .antMatchers("/", "/home").permitAll()
+                .antMatchers("/", "/home", "/survey/**").permitAll()
                 .antMatchers("/admin/**").access("hasRole('ADMIN')")
                 .antMatchers("/db/**").access("hasRole('ADMIN') and hasRole('DBA')")
                 .and().formLogin().loginPage("/login")

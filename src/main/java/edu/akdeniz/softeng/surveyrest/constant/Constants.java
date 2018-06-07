@@ -1,14 +1,8 @@
 package edu.akdeniz.softeng.surveyrest.constant;
 
 
-import edu.akdeniz.softeng.surveyrest.entity.Survey;
-import edu.akdeniz.softeng.surveyrest.util.custom.CustomSurveyList;
-import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * @author maemresen

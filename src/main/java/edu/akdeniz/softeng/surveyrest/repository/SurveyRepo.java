@@ -1,7 +1,7 @@
 package edu.akdeniz.softeng.surveyrest.repository;
 
 
-import edu.akdeniz.softeng.surveyrest.entity.Survey;
+import edu.akdeniz.softeng.surveyrest.entity.survey.Survey;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 public interface SurveyRepo extends MongoRepository<Survey, String> {

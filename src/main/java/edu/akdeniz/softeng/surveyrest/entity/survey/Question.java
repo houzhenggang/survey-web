@@ -1,32 +1,33 @@
-package edu.akdeniz.softeng.surveyrest.entity;
+package edu.akdeniz.softeng.surveyrest.entity.survey;
 
 import com.maemresen.jutils.collections.NotNullList;
+import com.maemresen.jutils.helper.DateTimeHelper;
+import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.util.ArrayList;
-import java.util.Collection;
+import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 @Document
 public class Question {
 
-
-    private String id;
+    @Id
+    private String id = UUID.randomUUID().toString();
     private String type;
     private String title;
     private String hint;
+    private Date createDate;
     private List<Answer> choices;
+
 
     public Question() {
         choices = new NotNullList<>();
+        createDate = DateTimeHelper.getCurrentDay();
     }
 
     public String getId() {
         return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
     }
 
     public String getType() {
@@ -57,7 +58,18 @@ public class Question {
         return choices;
     }
 
+
+    public String getCreateDate() {
+        return DateTimeHelper.getTheDateInString(DateTimeHelper.DateFormat.MYSQL, createDate);
+    }
+
+    public void setCreateDate(Date createDate) {
+        this.createDate = createDate;
+    }
+
     public void setChoices(List<Answer> choices) {
         this.choices = new NotNullList<>(choices);
     }
+
+
 }

@@ -1,7 +1,7 @@
 package edu.akdeniz.softeng.surveyrest.controller;
 
 
-import edu.akdeniz.softeng.surveyrest.entity.Survey;
+import edu.akdeniz.softeng.surveyrest.entity.survey.Survey;
 import edu.akdeniz.softeng.surveyrest.service.SurveyService;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -23,12 +23,22 @@ public class SurveyController {
     }
 
 
+    /* Will be deleted */
     @ResponseBody
-    @GetMapping("/survey/reset")
-    public List<Survey> reset() {
-        return surveyService.testDB();
+    @GetMapping("/survey/clear")
+    @Deprecated
+    public List<Survey> clear() {
+        return surveyService.clearDB();
     }
 
+    @ResponseBody
+    @GetMapping("/survey/reset")
+    @Deprecated
+    public List<Survey> reset() {
+        return surveyService.resetDB();
+    }
+
+    /*-------------------*/
     @ResponseBody
     @GetMapping(API.SURVEY_LIST_SERVICE_URL)
     public List<Survey> getSurveyList() {

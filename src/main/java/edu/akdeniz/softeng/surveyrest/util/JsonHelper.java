@@ -6,8 +6,12 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 public class JsonHelper {
 
 
-    public static <T> String objectToJson(T object) throws JsonProcessingException {
+    public static <T> String objectToJson(T object) {
         ObjectMapper objectMapper = new ObjectMapper();
-        return objectMapper.writeValueAsString(object);
+        try {
+            return objectMapper.writeValueAsString(object);
+        } catch (JsonProcessingException e) {
+            return "";
+        }
     }
 }
