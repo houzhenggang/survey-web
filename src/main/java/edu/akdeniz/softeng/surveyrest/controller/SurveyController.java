@@ -13,7 +13,7 @@ import edu.akdeniz.softeng.surveyrest.constant.Constants.API;
 import java.util.List;
 
 @Controller
-public class SurveyController {
+public class    SurveyController {
 
     private final SurveyService surveyService;
 
