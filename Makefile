@@ -1,5 +1,5 @@
 deploy : | install
-    cp target/surveyrest.war /var/lib/tomcat/webapps/
+	cp target/surveyrest.war /var/lib/tomcat/webapps/
 install :
-    git pull
-    mvn clean package
+	git pull
+	mvn clean package
