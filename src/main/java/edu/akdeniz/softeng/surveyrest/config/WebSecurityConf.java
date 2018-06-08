@@ -2,6 +2,7 @@ package edu.akdeniz.softeng.surveyrest.config;
 
 import edu.akdeniz.softeng.surveyrest.constant.Constants;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -15,12 +16,15 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.ldap.authentication.ad.ActiveDirectoryLdapAuthenticationProvider;
 
 import java.util.Arrays;
+import java.util.Collections;
 
 @Configuration
 public class WebSecurityConf extends WebSecurityConfigurerAdapter {
 
 
-    private String AD_DOMAIN = "bim.akdeniz.edu.tr";
+    @Value("${ad.domain}")
+    private String AD_DOMAIN;
+    @Value("${ad.url}")
     private String AD_URL = "ldap://10.44.0.5:389";
 
     @Override
@@ -30,7 +34,7 @@ public class WebSecurityConf extends WebSecurityConfigurerAdapter {
 
     @Bean
     public AuthenticationManager authenticationManager() {
-        return new ProviderManager(Arrays.asList(activeDirectoryLdapAuthenticationProvider()));
+        return new ProviderManager(Collections.singletonList(activeDirectoryLdapAuthenticationProvider()));
     }
 
     @Bean

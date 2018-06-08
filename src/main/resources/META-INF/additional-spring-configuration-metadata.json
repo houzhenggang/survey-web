@@ -1,0 +1,14 @@
+{
+  "properties": [
+    {
+      "name": "ad.domain",
+      "type": "java.lang.String",
+      "description": "Description for ad.domain."
+    },
+    {
+      "name": "ad.url",
+      "type": "java.lang.String",
+      "description": "Description for ad.url."
+    }
+  ]
+}

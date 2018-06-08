@@ -32,7 +32,6 @@ public class HelloWorldController {
         return "admin";
     }
 
-
     @RequestMapping(value = "/Access_Denied", method = RequestMethod.GET)
     public String accessDeniedPage(ModelMap model) {
         model.addAttribute("user", SecurityHelper.getUserName());
