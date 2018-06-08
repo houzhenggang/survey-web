@@ -1,6 +1,7 @@
 package edu.akdeniz.softeng.surveyrest.controller;
 
 
+import edu.akdeniz.softeng.surveyrest.entity.Result;
 import edu.akdeniz.softeng.surveyrest.entity.survey.Survey;
 import edu.akdeniz.softeng.surveyrest.service.SurveyService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +14,7 @@ import edu.akdeniz.softeng.surveyrest.constant.Constants.API;
 import java.util.List;
 
 @Controller
-public class    SurveyController {
+public class SurveyController {
 
     private final SurveyService surveyService;
 
@@ -75,4 +76,12 @@ public class    SurveyController {
     // TODO : delete survey ??
 
     // TODO : edit survey??
+
+    /* Reults */
+    @ResponseBody
+    @GetMapping("/survey/result/list")
+    public List<Result> getResultList() {
+        return surveyService.getResultList();
+    }
+
 }

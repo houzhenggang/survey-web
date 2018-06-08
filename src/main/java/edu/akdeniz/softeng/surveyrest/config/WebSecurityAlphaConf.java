@@ -5,54 +5,28 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.ProviderManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.ldap.authentication.ad.ActiveDirectoryLdapAuthenticationProvider;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
 
-import java.util.Arrays;
 import java.util.Collections;
 
 @Configuration
-public class WebSecurityConf extends WebSecurityConfigurerAdapter {
+@Profile("alpha")
+public class WebSecurityAlphaConf extends WebSecurityConfigurerAdapter {
 
 
-    @Value("${ad.domain}")
-    private String AD_DOMAIN;
-    @Value("${ad.url}")
-    private String AD_URL = "ldap://10.44.0.5:389";
-
-    @Override
-    protected void configure(AuthenticationManagerBuilder authManagerBuilder) throws Exception {
-        authManagerBuilder.authenticationProvider(activeDirectoryLdapAuthenticationProvider()).userDetailsService(userDetailsService());
-    }
-
-    @Bean
-    public AuthenticationManager authenticationManager() {
-        return new ProviderManager(Collections.singletonList(activeDirectoryLdapAuthenticationProvider()));
-    }
-
-    @Bean
-    public AuthenticationProvider activeDirectoryLdapAuthenticationProvider() {
-        ActiveDirectoryLdapAuthenticationProvider provider = new ActiveDirectoryLdapAuthenticationProvider(AD_DOMAIN, AD_URL);
-        provider.setConvertSubErrorCodesToExceptions(true);
-        provider.setUseAuthenticationRequestCredentials(true);
-
-        return provider;
-    }
-
-
-    /*---------------------------------*/
     @Autowired
     public void configureGlobalSecurity(AuthenticationManagerBuilder auth) throws Exception {
-        auth.inMemoryAuthentication().withUser(Constants.Credentials.USER_NAME).password(Constants.Credentials.ENCRYPTED_USER_PASS).roles("USER");
-        auth.inMemoryAuthentication().withUser("admin").password("root123").roles("ADMIN");
-        auth.inMemoryAuthentication().withUser("dba").password("root123").roles("ADMIN", "DBA");
+        auth.inMemoryAuthentication().withUser(Constants.Credentials.USER_NAME).password(Constants.Credentials.ENCRYPTED_USER_PASS).authorities("Survey");
     }
 
 
@@ -61,13 +35,13 @@ public class WebSecurityConf extends WebSecurityConfigurerAdapter {
         return new BCryptPasswordEncoder();
     }
 
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
         http.authorizeRequests()
                 .antMatchers("/", "/home", "/survey/**").permitAll()
-                .antMatchers("/admin/**").access("hasAnyAuthority('Survey')")
-                .antMatchers("/db/**").access("hasAnyAuthority('Survey')")
+                .antMatchers("/secure/**").access("hasAnyAuthority('Survey')")
                 .and().formLogin().loginPage("/login")
                 .usernameParameter("ssoId").passwordParameter("password")
                 .and().exceptionHandling().accessDeniedPage("/Access_Denied");

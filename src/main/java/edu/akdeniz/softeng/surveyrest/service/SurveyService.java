@@ -11,6 +11,7 @@ import edu.akdeniz.softeng.surveyrest.repository.QuestionRepo;
 import edu.akdeniz.softeng.surveyrest.repository.ResultRepo;
 import edu.akdeniz.softeng.surveyrest.repository.SurveyRepo;
 import edu.akdeniz.softeng.surveyrest.util.JsonHelper;
+import edu.akdeniz.softeng.surveyrest.util.SecurityHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -79,32 +80,16 @@ public class SurveyService {
         survey.setQuestions(Arrays.asList(q1, q2));
         save(survey);
 
-        for (Question q : survey.getQuestions()) {
+        survey = new Survey();
+        survey.setTitle("Survey Title 2");
+        survey.setDescription("Survey Description 2");
+        survey.setQuestions(Arrays.asList(q2));
+        save(survey);
 
-            Result result = new Result();
-            result.setUserId("user1");
-            result.setSurveyId(survey.getSurveyId());
-            result.setQuestionId(q.getId());
-
-            // getting answer id
-            int cc = q.getChoices().size();
-            if (cc < 1) {
-                result.setComment("my comment");
-            } else {
-                Random rand = new Random();
-                Answer a = q.getChoices().get(rand.nextInt(cc));
-                result.setAnswerId(a.getId());
-            }
-            resultRepo.save(result);
-        }
 
         // printing out...
         ConsoleHelper.startSection("Survey List");
         System.out.println(JsonHelper.objectToJson(surveyRepo.findAll()));
-
-        ConsoleHelper.startSection("Result List");
-        System.out.println(JsonHelper.objectToJson(resultRepo.findAll()));
-
         return surveyRepo.findAll();
     }
 
@@ -146,4 +131,8 @@ public class SurveyService {
 
     // TODO : edit survey??
 
+    public Result save(Result result) {
+        resultRepo.save(result);
+        return result;
+    }
 }

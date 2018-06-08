@@ -13,6 +13,7 @@ public class Answer {
     @Id
     private String id = UUID.randomUUID().toString();
     private String content;
+    private String comment;
     private Date createDate;
 
     public Answer() {
@@ -30,6 +31,14 @@ public class Answer {
 
     public void setContent(String content) {
         this.content = content;
+    }
+
+    public String getComment() {
+        return comment;
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment;
     }
 
     public void setId(String id) {

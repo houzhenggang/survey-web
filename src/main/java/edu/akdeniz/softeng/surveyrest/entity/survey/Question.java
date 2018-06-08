@@ -71,5 +71,8 @@ public class Question {
         this.choices = new NotNullList<>(choices);
     }
 
+    public boolean single() {
+        return type.equalsIgnoreCase("singleline");
+    }
 
 }
