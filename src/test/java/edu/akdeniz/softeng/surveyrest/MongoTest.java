@@ -3,6 +3,8 @@ package edu.akdeniz.softeng.surveyrest;
 import com.maemresen.jutils.helper.ConsoleHelper;
 import edu.akdeniz.softeng.surveyrest.entity.survey.Survey;
 import edu.akdeniz.softeng.surveyrest.service.SurveyService;
+import edu.akdeniz.softeng.surveyrest.service.manipulation.SurveyManipulationService;
+import edu.akdeniz.softeng.surveyrest.util.helper.SurveyHelper;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,25 +20,31 @@ public class MongoTest {
     @Autowired
     private SurveyService surveyService;
 
+    @Autowired
+    private SurveyHelper surveyHelper;
+
+    @Autowired
+    private SurveyManipulationService surveyManipulationService;
+
     @Test
     public void CRUDTest() {
         ConsoleHelper.printAction(() -> {
-            Survey survey = surveyService.getDummySurvey();
+            Survey survey = surveyHelper.getDummySurvey();
             // inserting
-            surveyService.save(survey);
+            surveyManipulationService.save(survey);
             System.out.println(survey + " saved successfully");
             listResults();
 
             // update
             ConsoleHelper.startSection("Updating");
             survey.setTitle("UpdatedTitle");
-            surveyService.save(survey);
+            surveyManipulationService.save(survey);
             System.out.println(survey + " updated successfully");
             listResults();
 
             // deleting
             ConsoleHelper.startSection("Deleting Dummy Content");
-            surveyService.delete(survey);
+            surveyManipulationService.delete(survey);
             System.out.println(survey + " deleted successfully");
             listResults();
         }, "CRUD Test");

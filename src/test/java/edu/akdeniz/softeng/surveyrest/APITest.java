@@ -35,29 +35,20 @@ public class APITest {
 
     //"http://localhost:7100"
 
-    @Test
-    public void SurveyListAPITest() throws Exception {
-        resultActions(this.mockMvc.perform(getBuilder(Constants.API.SURVEY_LIST_SERVICE_URL)));
-    }
+    // TODO : no needed, there will not be APIs
 
-    @Test
-    public void SurveyShowAPITest() throws Exception {
-        MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
-        params.add("surveyId", "5b17b81ea8027c31ccb494d3");
-        resultActions(this.mockMvc.perform(getBuilder(Constants.API.SURVEY_SHOW_SERVICE_URL, params)));
-    }
+//    @Test
+//    public void SurveyListAPITest() throws Exception {
+//        resultActions(this.mockMvc.perform(getBuilder(Constants.API.SURVEY_LIST_SERVICE_URL)));
+//    }
+//
+//    @Test
+//    public void SurveyShowAPITest() throws Exception {
+//        MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
+//        params.add("surveyId", "5b17b81ea8027c31ccb494d3");
+//        resultActions(this.mockMvc.perform(getBuilder(Constants.API.SURVEY_SHOW_SERVICE_URL, params)));
+//    }
 
-    @Test
-    public void SurveySaveAPITest() throws Exception {
-        Survey testSurvey = new Survey();
-        resultActions(this.mockMvc.perform(getBuilder(Constants.API.SURVEY_SAVE_SERVICE_URL, JsonHelper.objectToJson(testSurvey))));
-    }
-
-    @Test
-    public void SurveyCreateAPITest() throws Exception {
-        Survey testSurvey = new Survey();
-        resultActions(this.mockMvc.perform(getBuilder(Constants.API.SURVEY_CREATE_SERVICE_URL, JsonHelper.objectToJson(testSurvey))));
-    }
 
     /* Helper */
     private void resultActions(ResultActions resultActions) throws Exception {

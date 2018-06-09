@@ -12,10 +12,8 @@ public class Constants {
     public static class API {
 
         // TODO : consider them
-        public static final String SURVEY_LIST_SERVICE_URL = "/survey/list";
-        public static final String SURVEY_CREATE_SERVICE_URL = "/survey/create";
-        public static final String SURVEY_SAVE_SERVICE_URL = "/survey/save";
-        public static final String SURVEY_SHOW_SERVICE_URL = "/survey/show";
+        public static final String SURVEY_CLEAR_SERVICE_URL = "/survey/clear";
+        public static final String SURVEY_RESET_SERVICE_URL = "/survey/reset";
 
     }
 

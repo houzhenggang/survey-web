@@ -12,7 +12,7 @@ import javax.servlet.http.HttpSession;
 
 
 @Controller
-public class ExceptionHandlingController implements ErrorController {
+public class ExceptionHandler implements ErrorController {
 
     @RequestMapping(value = Constants.ERROR_URI)
     private String error(HttpServletRequest request, HttpServletResponse response, HttpSession session, Model model) {

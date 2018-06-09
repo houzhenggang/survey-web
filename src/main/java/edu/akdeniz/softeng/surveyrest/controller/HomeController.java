@@ -1,35 +1,26 @@
 package edu.akdeniz.softeng.surveyrest.controller;
 
 import edu.akdeniz.softeng.surveyrest.entity.SurveyResult;
-import edu.akdeniz.softeng.surveyrest.entity.survey.Survey;
 import edu.akdeniz.softeng.surveyrest.service.SurveyService;
-import edu.akdeniz.softeng.surveyrest.util.SecurityHelper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 @Controller
-public class PageController {
-
+public class HomeController {
 
     private final SurveyService surveyService;
 
     @Autowired
-    public PageController(SurveyService surveyService) {
+    public HomeController(SurveyService surveyService) {
         this.surveyService = surveyService;
     }
 
     @GetMapping(value = {"/", "/home"})
     public String homePage(ModelMap model) {
-        return "welcome";
+        return "redirect:/surveys";
     }
 
     @GetMapping("/surveys")
@@ -45,6 +36,25 @@ public class PageController {
         }
         model.addAttribute("survey", surveyService.getSurvey(surveyId));
         return "apply";
+    }
+
+    @PostMapping("/survey/end")
+    public SurveyResult end(@ModelAttribute("surveyResult") SurveyResult surveyResult) {
+        return surveyResult;
+    }
+
+
+    /* Secured */
+
+    @GetMapping("/secure/survey/{surveyId}/edit")
+    public String edit(Model model, @PathVariable String surveyId) {
+        model.addAttribute("survey", surveyService.getSurvey(surveyId));
+        return "edit";
+    }
+
+    @GetMapping("/secure/survey/create")
+    public String create() {
+        return "create";
     }
 
 
