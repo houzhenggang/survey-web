@@ -68,14 +68,8 @@ public class SurveyController {
     @ResponseBody
     @GetMapping(API.SURVEY_SHOW_SERVICE_URL)
     public Survey show(@RequestParam String surveyId) {
-        return surveyService.show(surveyId);
+        return surveyService.getSurvey(surveyId);
     }
-
-    // TODO : take survey ??
-
-    // TODO : delete survey ??
-
-    // TODO : edit survey??
 
     /* Reults */
     @ResponseBody

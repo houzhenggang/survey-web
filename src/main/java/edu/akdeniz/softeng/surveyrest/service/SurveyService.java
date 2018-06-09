@@ -33,13 +33,50 @@ public class SurveyService {
     }
 
 
+    public Survey getSurvey(String id) {
+        return surveyRepo.findById(id).orElse(null);
+    }
+
+    public List<Survey> getSurveyList() {
+        return new NotNullList<>(surveyRepo.findAll());
+    }
+
+    // TODO : no need
+
+    public String create() {
+        // TODO : parameters? returns what?
+        return "create";
+    }
+
+
+    public Survey save(Survey survey) {
+        surveyRepo.save(survey);
+        return survey;
+    }
+
+    public void delete(Survey survey) {
+        surveyRepo.delete(survey);
+    }
+
+    // . Result List .....................................
+
+    public List<Result> getResultList() {
+        return new NotNullList<Result>(resultRepo.findAll());
+    }
+
+    public Result save(Result result) {
+        resultRepo.save(result);
+        return result;
+    }
+
+    // .......................................
+
     public Survey getDummySurvey() {
         Survey temp = new Survey();
         temp.setTitle("DummySurvey1");
         temp.setDescription("DummyDescription1");
         return temp;
     }
-
 
     public List<Survey> clearDB() {
         surveyRepo.deleteAll();
@@ -94,45 +131,4 @@ public class SurveyService {
     }
 
 
-    public List<Survey> getSurveyList() {
-        return new NotNullList<>(surveyRepo.findAll());
-    }
-
-    public List<Result> getResultList() {
-        return new NotNullList<Result>(resultRepo.findAll());
-    }
-
-    // .......................................
-
-    // TODO : no need
-
-    public String create() {
-        // TODO : parameters? returns what?
-        return "create";
-    }
-
-
-    public Survey save(Survey survey) {
-        surveyRepo.save(survey);
-        return survey;
-    }
-
-    public Survey show(String id) {
-        return surveyRepo.findById(id).orElse(null);
-    }
-
-    public void delete(Survey survey) {
-        surveyRepo.delete(survey);
-    }
-
-    // TODO : take survey ??
-
-    // TODO : delete survey ??
-
-    // TODO : edit survey??
-
-    public Result save(Result result) {
-        resultRepo.save(result);
-        return result;
-    }
 }

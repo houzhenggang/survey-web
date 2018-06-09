@@ -2,7 +2,7 @@
 <%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 <t:layout title="Applying ${each.getTitle()}">
 
@@ -15,17 +15,19 @@
                 <div class="card-header">
                         ${question.getTitle()}
                 </div>
-
+                <input type="hidden" name="results[${counter}].userId"/>
+                <input type="hidden" name="results[${counter}].surveyId"/>
+                <input type="hidden" name="results[${counter}].questionId"/>
                 <div class="card-body">
                     <c:if test="${question.single()}">
-                        <input type="text" id="${answer.getId()}" name="surveyResult.results[${counter}].comment"
+                        <input type="text" id="${answer.getId()}" name="results[${counter}].comment"
                                placeholder="${question.getHint()}" class="p-2" style="width: 100%"/>
                     </c:if>
                     <c:if test="${!question.single()}">
                         <c:forEach var="answer" items="${question.getChoices()}">
                             <div class="custom-control custom-radio">
                                 <input type="radio" id="${answer.getId()}"
-                                       name="surveyResult.results[${counter}].answerId"
+                                       name="results[${counter}].answerId"
                                        value="${answer.getId()}"
                                        class="custom-control-input">
                                 <label class="custom-control-label" for="${answer.getId()}">
