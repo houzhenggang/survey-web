@@ -1,4 +1,4 @@
-<%@ tag import="edu.akdeniz.softeng.surveyrest.util.SecurityHelper" %>
+<%@ tag import="edu.akdeniz.softeng.surveyrest.util.helper.SecurityHelper" %>
 <%@tag description="Simple Wrapper Tag" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@attribute name="title" required="true" %>

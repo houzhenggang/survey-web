@@ -1,10 +1,7 @@
 package edu.akdeniz.softeng.surveyrest;
 
 import edu.akdeniz.softeng.surveyrest.constant.Constants;
-import edu.akdeniz.softeng.surveyrest.entity.survey.Survey;
-import edu.akdeniz.softeng.surveyrest.util.JsonHelper;
 import org.junit.Ignore;
-import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -23,7 +20,9 @@ import org.springframework.util.MultiValueMap;
 
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.httpBasic;
 
-
+/**
+ * @author Mustafa Arif Şişman, Mustafa Fatih Baysan
+ */
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @AutoConfigureMockMvc

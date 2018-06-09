@@ -1,16 +1,19 @@
-package edu.akdeniz.softeng.surveyrest.util;
+package edu.akdeniz.softeng.surveyrest.util.helper;
 
 import com.maemresen.jutils.collections.NotNullList;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
-import java.util.List;
 
+/**
+ * @author maemresen
+ * <p>
+ * Helper class to handle Spring Security stuff
+ */
 public class SecurityHelper {
 
 
@@ -19,6 +22,9 @@ public class SecurityHelper {
         return SecurityContextHolder.getContext().getAuthentication();
     }
 
+    /**
+     * @return principals of the user
+     */
     public static UserDetails getPrincipal() {
         Authentication authentication = getAuthentication();
         if (authentication == null) {
@@ -31,6 +37,9 @@ public class SecurityHelper {
         return null;
     }
 
+    /**
+     * @return user name info of the authenticated user
+     */
     public static String getUserName() {
         UserDetails userDetails = getPrincipal();
         if (userDetails == null) {
@@ -39,6 +48,9 @@ public class SecurityHelper {
         return userDetails.getUsername();
     }
 
+    /**
+     * @return is user authenticated or not
+     */
     public static boolean isAuthenticated() {
         Authentication authentication = getAuthentication();
         if (authentication == null) {
@@ -48,6 +60,13 @@ public class SecurityHelper {
     }
 
     /* Authorization */
+
+    /**
+     * Check if user has any of authorities given as parameter
+     *
+     * @param auths authorities will be check
+     * @return user has any of them or not
+     */
     public static boolean hasAuthority(String... auths) {
         Collection<? extends GrantedAuthority> authorities = getAuthorities();
         for (GrantedAuthority authority : authorities) {
@@ -60,6 +79,9 @@ public class SecurityHelper {
         return false;
     }
 
+    /**
+     * @return authorities of the user
+     */
     public static Collection<? extends GrantedAuthority> getAuthorities() {
         UserDetails userDetails = getPrincipal();
         if (userDetails == null) {
@@ -68,4 +90,16 @@ public class SecurityHelper {
         return userDetails.getAuthorities();
     }
 
+    /**
+     * Generates UID for authenticated user
+     *
+     * @return generated uid of authenticated user
+     */
+    public static String generateUID() {
+        if (!isAuthenticated()) {
+            return "-1";
+        }
+        // TODO : generate UID from authenticated user
+        return getUserName();
+    }
 }

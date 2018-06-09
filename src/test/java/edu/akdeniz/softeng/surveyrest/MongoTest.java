@@ -5,6 +5,7 @@ import edu.akdeniz.softeng.surveyrest.entity.survey.Survey;
 import edu.akdeniz.softeng.surveyrest.service.SurveyService;
 import edu.akdeniz.softeng.surveyrest.service.manipulation.SurveyManipulationService;
 import edu.akdeniz.softeng.surveyrest.util.helper.SurveyHelper;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,9 +13,13 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+/**
+ * @author Mustafa Arif Şişman, Mustafa Fatih Baysan
+ */
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @AutoConfigureMockMvc
+@Ignore
 public class MongoTest {
 
     @Autowired

@@ -1,7 +1,5 @@
 package edu.akdeniz.softeng.surveyrest.config;
 
-import edu.akdeniz.softeng.surveyrest.constant.Constants;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -18,6 +16,12 @@ import org.springframework.security.ldap.authentication.ad.ActiveDirectoryLdapAu
 
 import java.util.Collections;
 
+/**
+ * @author maemresen
+ * <p>
+ * Spring Security configuration for producetion version.
+ * Users are stored in Active Directory Server.
+ */
 @Configuration
 @Profile("prod")
 public class WebSecurityProdConf extends WebSecurityConfigurerAdapter {

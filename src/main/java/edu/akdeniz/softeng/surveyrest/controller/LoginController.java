@@ -1,6 +1,6 @@
 package edu.akdeniz.softeng.surveyrest.controller;
 
-import edu.akdeniz.softeng.surveyrest.util.SecurityHelper;
+import edu.akdeniz.softeng.surveyrest.util.helper.SecurityHelper;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
@@ -12,6 +12,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+/**
+ * @author maemresen
+ * <p>
+ * Controller to handle login stuff.
+ */
 @Controller
 public class LoginController {
 

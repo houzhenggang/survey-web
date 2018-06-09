@@ -1,8 +1,14 @@
-package edu.akdeniz.softeng.surveyrest.util;
+package edu.akdeniz.softeng.surveyrest.util.helper;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+
+/**
+ * @author maemresen
+ *
+ * Helper class to convert ojbect to JSON
+ */
 public class JsonHelper {
 
 

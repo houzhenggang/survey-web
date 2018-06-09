@@ -8,6 +8,12 @@ import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
+
+/**
+ * @author maemresen
+ * <p>
+ * Controller to handle end-user opearations like loading pages etc.
+ */
 @Controller
 public class HomeController {
 

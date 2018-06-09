@@ -8,6 +8,11 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+/**
+ * @author maemresen
+ * <p>
+ * Service to results.
+ */
 @Service
 public class ResultService {
 
@@ -19,15 +24,7 @@ public class ResultService {
     }
 
     public List<Result> getResultList() {
-        return new NotNullList<Result>(resultRepo.findAll());
+        return new NotNullList<>(resultRepo.findAll());
     }
 
-    public Result save(Result result) {
-        resultRepo.save(result);
-        return result;
-    }
-
-    public void save(List<Result> results) {
-        results.forEach(this::save);
-    }
 }

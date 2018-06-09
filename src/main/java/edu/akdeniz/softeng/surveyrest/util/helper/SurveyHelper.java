@@ -8,14 +8,20 @@ import edu.akdeniz.softeng.surveyrest.service.ResultService;
 import edu.akdeniz.softeng.surveyrest.service.SurveyService;
 import edu.akdeniz.softeng.surveyrest.service.manipulation.ResultManipulationService;
 import edu.akdeniz.softeng.surveyrest.service.manipulation.SurveyManipulationService;
-import edu.akdeniz.softeng.surveyrest.util.JsonHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 
+/**
+ * @author maemresen
+ *
+ * Component consist of helper funtions
+ * reset all data, clear all data etc.
+ */
 @Component
 public class SurveyHelper {
 
@@ -82,7 +88,7 @@ public class SurveyHelper {
         survey = new Survey();
         survey.setTitle("Survey Title 2");
         survey.setDescription("Survey Description 2");
-        survey.setQuestions(Arrays.asList(q2));
+        survey.setQuestions(Collections.singletonList(q2));
         surveyManipulationService.save(survey);
 
 

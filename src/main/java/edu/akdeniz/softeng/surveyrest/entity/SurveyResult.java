@@ -1,12 +1,20 @@
 package edu.akdeniz.softeng.surveyrest.entity;
 
 import com.maemresen.jutils.collections.NotNullList;
-import edu.akdeniz.softeng.surveyrest.entity.survey.Survey;
 
 import java.util.List;
 
+
+/**
+ * @author maemresen
+ * <p>
+ * Model sotres answers of the user.
+ */
 public class SurveyResult {
 
+    /**
+     * results of user
+     */
     private List<Result> results;
 
     public SurveyResult() {

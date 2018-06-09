@@ -9,15 +9,38 @@ import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
+/**
+ * @author maemresen
+ */
 @Document
 public class Question {
 
     @Id
     private String id = UUID.randomUUID().toString();
+
+    /**
+     * type of question, open-ended, multi-choice etc.
+     */
     private String type;
+
+    /**
+     * title of the question
+     */
     private String title;
+
+    /**
+     * hint to answer, not necessary
+     */
     private String hint;
+
+    /**
+     * creation date of question
+     */
     private Date createDate;
+
+    /**
+     * choices of the question
+     */
     private List<Answer> choices;
 
 
@@ -71,6 +94,12 @@ public class Question {
         this.choices = new NotNullList<>(choices);
     }
 
+    /**
+     * @return is question open-ended or not
+     */
+
+    @SuppressWarnings("unused")
+    // TODO : DO NOT DELETE. JSP files are using
     public boolean single() {
         return false;
     }

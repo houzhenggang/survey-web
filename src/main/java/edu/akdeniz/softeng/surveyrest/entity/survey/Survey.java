@@ -9,14 +9,33 @@ import java.util.Date;
 import java.util.List;
 
 
+/**
+ * @author maemresen
+ */
 @Document
 public class Survey {
 
     @Id
     private String surveyId;
+
+    /**
+     * title of the survey
+     */
     private String title;
+
+    /**
+     * description of the survey
+     */
     private String description;
+
+    /**
+     * creation date of the survey
+     */
     private Date createDate;
+
+    /**
+     * questions of the survey
+     */
     private List<Question> questions;
 
 

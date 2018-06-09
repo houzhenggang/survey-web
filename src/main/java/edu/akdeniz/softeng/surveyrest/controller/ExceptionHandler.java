@@ -11,6 +11,12 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 
+/**
+ * @author maemresen
+ * <p>
+ * Controller to handle exception.
+ * E.g. 404, 502 etc.
+ */
 @Controller
 public class ExceptionHandler implements ErrorController {
 

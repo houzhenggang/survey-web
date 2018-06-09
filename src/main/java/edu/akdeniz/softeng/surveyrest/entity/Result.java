@@ -1,14 +1,36 @@
 package edu.akdeniz.softeng.surveyrest.entity;
 
-import java.util.HashMap;
-import java.util.Map;
 
+/**
+ * @author maemresen
+ * <p>
+ * Model to store answer of user for one question at on survey
+ */
 public class Result {
 
+    /**
+     * uid of the user who gives answer
+     */
     private String userId;
+
+    /**
+     * which survey
+     */
     private String surveyId;
+
+    /**
+     * which question
+     */
     private String questionId;
+
+    /**
+     * which choice
+     */
     private String answerId;
+
+    /**
+     * for open-ended questions
+     */
     private String comment;
 
 

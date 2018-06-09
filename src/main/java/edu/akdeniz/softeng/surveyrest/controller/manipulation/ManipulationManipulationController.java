@@ -1,7 +1,6 @@
 package edu.akdeniz.softeng.surveyrest.controller.manipulation;
 
 import edu.akdeniz.softeng.surveyrest.entity.survey.Survey;
-import edu.akdeniz.softeng.surveyrest.service.SurveyService;
 import edu.akdeniz.softeng.surveyrest.service.manipulation.SurveyManipulationService;
 import edu.akdeniz.softeng.surveyrest.util.helper.SurveyHelper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +9,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+/**
+ * @author maemresen
+ */
 @Controller
 @RequestMapping("/secure")
 public class ManipulationManipulationController {

@@ -1,20 +1,19 @@
 package edu.akdeniz.softeng.surveyrest.service;
 
 import com.maemresen.jutils.collections.NotNullList;
-import com.maemresen.jutils.helper.ConsoleHelper;
-import edu.akdeniz.softeng.surveyrest.entity.Result;
-import edu.akdeniz.softeng.surveyrest.entity.survey.Answer;
-import edu.akdeniz.softeng.surveyrest.entity.survey.Question;
 import edu.akdeniz.softeng.surveyrest.entity.survey.Survey;
-import edu.akdeniz.softeng.surveyrest.repository.ResultRepo;
 import edu.akdeniz.softeng.surveyrest.repository.SurveyRepo;
-import edu.akdeniz.softeng.surveyrest.util.JsonHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Arrays;
 import java.util.List;
 
+
+/**
+ * @author maemresen
+ * <p>
+ * Service for surveys.
+ */
 @Service
 public class SurveyService {
 

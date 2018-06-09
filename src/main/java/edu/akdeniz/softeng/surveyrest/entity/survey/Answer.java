@@ -7,13 +7,27 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import java.util.Date;
 import java.util.UUID;
 
+/**
+ * @author maemresen
+ */
 @Document
 public class Answer {
 
     @Id
     private String id = UUID.randomUUID().toString();
+    /**
+     * choice text, e.g. "This is Answer"
+     */
     private String content;
+
+    /**
+     * given answer, for open-ended questions
+     */
     private String comment;
+
+    /**
+     * creation date of that answer
+     */
     private Date createDate;
 
     public Answer() {
