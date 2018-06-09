@@ -1,4 +1,4 @@
-package edu.akdeniz.softeng.surveyrest.controller;
+package edu.akdeniz.softeng.surveyrest.controller.secure;
 
 import edu.akdeniz.softeng.surveyrest.service.SurveyService;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -41,14 +41,6 @@ public class SurveyService {
         return new NotNullList<>(surveyRepo.findAll());
     }
 
-    // TODO : no need
-
-    public String create() {
-        // TODO : parameters? returns what?
-        return "create";
-    }
-
-
     public Survey save(Survey survey) {
         surveyRepo.save(survey);
         return survey;
@@ -58,7 +50,7 @@ public class SurveyService {
         surveyRepo.delete(survey);
     }
 
-    // . Result List .....................................
+    // . Result .....................................
 
     public List<Result> getResultList() {
         return new NotNullList<Result>(resultRepo.findAll());

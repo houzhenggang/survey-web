@@ -48,12 +48,4 @@ public class PageController {
     }
 
 
-    // TODO : secure method vs method controller
-    @ResponseBody
-    @PostMapping("/survey/end")
-    public SurveyResult end(@ModelAttribute("surveyResult") SurveyResult surveyResult) {
-        return surveyResult;
-    }
-
-
 }

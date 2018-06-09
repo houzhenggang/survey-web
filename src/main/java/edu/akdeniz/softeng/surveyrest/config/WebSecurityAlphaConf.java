@@ -23,10 +23,9 @@ import java.util.Collections;
 @Profile("alpha")
 public class WebSecurityAlphaConf extends WebSecurityConfigurerAdapter {
 
-
     @Autowired
     public void configureGlobalSecurity(AuthenticationManagerBuilder auth) throws Exception {
-        auth.inMemoryAuthentication().withUser(Constants.Credentials.USER_NAME).password(Constants.Credentials.ENCRYPTED_USER_PASS).authorities("Survey");
+        auth.inMemoryAuthentication().withUser(Constants.Credentials.USER_NAME).password(Constants.Credentials.ENCRYPTED_USER_PASS).authorities("Survey", "Admin");
     }
 
 

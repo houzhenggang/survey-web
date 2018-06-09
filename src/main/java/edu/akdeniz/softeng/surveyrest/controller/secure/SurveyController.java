@@ -1,4 +1,4 @@
-package edu.akdeniz.softeng.surveyrest.controller;
+package edu.akdeniz.softeng.surveyrest.controller.secure;
 
 
 import edu.akdeniz.softeng.surveyrest.entity.Result;
@@ -14,7 +14,8 @@ import edu.akdeniz.softeng.surveyrest.constant.Constants.API;
 import java.util.List;
 
 @Controller
-public class SurveyController {
+
+public class    SurveyController {
 
     private final SurveyService surveyService;
 
@@ -26,14 +27,14 @@ public class SurveyController {
 
     /* Will be deleted */
     @ResponseBody
-    @GetMapping("/survey/clear")
+    @GetMapping("/api/survey/clear")
     @Deprecated
     public List<Survey> clear() {
         return surveyService.clearDB();
     }
 
     @ResponseBody
-    @GetMapping("/survey/reset")
+    @GetMapping("/api/survey/reset")
     @Deprecated
     public List<Survey> reset() {
         return surveyService.resetDB();

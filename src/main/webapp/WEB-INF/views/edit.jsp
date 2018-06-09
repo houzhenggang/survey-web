@@ -24,7 +24,7 @@
         <div class="questions">
             <c:forEach var="question" items="${survey.getQuestions()}">
                 <div class="form-group card question" data-qindex="${qc}">
-                    <label for="questions[${qc}].title">Question ${qc}</label>
+                    <label for="questions[${qc}].title">Question ${qc+1}</label>
                     <div class="form-group">
                         <input type="hidden" name="questions[${qc}].id" value="${question.getId()}">
                         <input type="text" class="form-control" name="questions[${qc}].title"
@@ -38,7 +38,7 @@
                         <c:set var="ac" value="0"/>
                         <c:forEach var="answer" items="${question.getChoices()}">
                             <input type="hidden" value="${answer.getId()}" name="questions[${qc}].choices[${ac}].id">
-                            <label for="answer${ac}">Answer ${ac}</label>
+                            <label for="answer${ac}">Choice ${ac+1}</label>
                             <div class="col-lg-12 form-group form-check-inline">
                                 <i class="far fa-circle fake-radio"></i>
                                 <input type="text" class="form-control" name="questions[${qc}].choices[${ac}].content"
@@ -74,7 +74,7 @@
             /**/
             let label = document.createElement('label');
             label.setAttribute('for', id);
-            label.innerText = 'Answer ' + next;
+            label.innerText = 'Choice ' + (next + 1);
 
 
             /**/
@@ -110,7 +110,7 @@
             // .........
             let label = document.createElement("label");
             label.setAttribute('for', id);
-            label.innerText = 'Question ' + next;
+            label.innerText = 'Question ' + (next + 1);
 
             // .........
             let input = document.createElement('input');

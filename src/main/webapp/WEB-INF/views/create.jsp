@@ -37,7 +37,7 @@
             /**/
             let label = document.createElement('label');
             label.setAttribute('for', id);
-            label.innerText = 'Answer ' + next;
+            label.innerText = 'Choice ' + next;
 
 
             /**/
