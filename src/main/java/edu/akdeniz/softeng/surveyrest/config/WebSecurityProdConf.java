@@ -17,7 +17,7 @@ import org.springframework.security.ldap.authentication.ad.ActiveDirectoryLdapAu
 import java.util.Collections;
 
 /**
- * @author maemresen
+ * @author maemresen, Canberk Ardıç
  * <p>
  * Spring Security configuration for producetion version.
  * Users are stored in Active Directory Server.

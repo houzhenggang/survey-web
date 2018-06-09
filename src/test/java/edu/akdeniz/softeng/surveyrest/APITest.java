@@ -21,7 +21,7 @@ import org.springframework.util.MultiValueMap;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.httpBasic;
 
 /**
- * @author Mustafa Arif Şişman, Mustafa Fatih Baysan
+ * @author maemresen, Mustafa Arif Şişman, Mustafa Fatih Baysan
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest

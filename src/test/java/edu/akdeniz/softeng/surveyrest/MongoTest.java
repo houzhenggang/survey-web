@@ -14,7 +14,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 /**
- * @author Mustafa Arif Şişman, Mustafa Fatih Baysan
+ * @author maemresen, Mustafa Arif Şişman, Mustafa Fatih Baysan
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest
