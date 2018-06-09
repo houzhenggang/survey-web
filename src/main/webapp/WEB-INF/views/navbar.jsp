@@ -26,6 +26,11 @@
             <sec:authorize access="isAuthenticated()">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
+                        <a class="nav-link" href="<c:url value="/secure/survey/create"/>">
+                            Create Survey
+                        </a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" href="javascript:void(0)" style="cursor: default">
                             Welcome <sec:authentication property="principal.username"/>
                         </a>

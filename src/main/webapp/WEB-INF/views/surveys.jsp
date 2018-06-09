@@ -20,7 +20,7 @@
             <ul class="list-group list-group-flush">
                 <sec:authorize access="isAuthenticated()">
                     <li class="list-group-item">
-                        <a href="<c:url value="/secure/survey/${each.getSurveyId()}"/>">
+                        <a href="<c:url value="/secure/survey/${each.getSurveyId()}/edit"/>">
                             Edit
                         </a>
                     </li>

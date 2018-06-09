@@ -8,16 +8,17 @@
 
     <h3>${survey.getTitle()}</h3>
     <p>${survey.getDescription()}</p>
-    <form action="<c:url value="/survey/end"/>">
+    <form action="<c:url value="/survey/end"/>" method="post">
+        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
         <c:set value="0" var="counter"/>
         <c:forEach var="question" items="${survey.getQuestions()}">
             <div class="form-group card">
                 <div class="card-header">
                         ${question.getTitle()}
                 </div>
-                <input type="hidden" name="results[${counter}].userId"/>
-                <input type="hidden" name="results[${counter}].surveyId"/>
-                <input type="hidden" name="results[${counter}].questionId"/>
+                <input type="hidden" name="results[${counter}].userId" value="1"/>
+                <input type="hidden" name="results[${counter}].surveyId" value="${survey.getSurveyId()}"/>
+                <input type="hidden" name="results[${counter}].questionId" value="${question.getId()}"/>
                 <div class="card-body">
                     <c:if test="${question.single()}">
                         <input type="text" id="${answer.getId()}" name="results[${counter}].comment"

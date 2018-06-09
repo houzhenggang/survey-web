@@ -33,17 +33,16 @@ public class MethodController {
 
     /* Secured */
 
-    @GetMapping("/survey/save")
-    public String save(Model model, @ModelAttribute("survey") Survey survey) {
+    @PostMapping("/survey/create")
+    public String create(@ModelAttribute("survey") Survey survey) {
         surveyService.save(survey);
         return "redirect:/secure/survey/" + survey.getSurveyId();
     }
 
-    @ResponseBody
-    @GetMapping("/survey/end")
-    public SurveyResult end(@ModelAttribute("surveyResult") SurveyResult surveyResult) {
-        return surveyResult;
+    @PostMapping("/survey/save")
+    public String save(@ModelAttribute("survey") Survey survey) {
+        surveyService.save(survey);
+        return "redirect:/secure/survey/" + survey.getSurveyId() + "/edit";
     }
-
 
 }

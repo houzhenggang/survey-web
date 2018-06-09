@@ -48,17 +48,12 @@ public class PageController {
     }
 
 
-    /* Secured */
-
-    @GetMapping("/secure/survey/edit/{surveyId}")
-    public String edit(Model model,@PathVariable String surveyId) {
-        model.addAttribute("survey",surveyService.getSurvey(surveyId));
-        return "create";
+    // TODO : secure method vs method controller
+    @ResponseBody
+    @PostMapping("/survey/end")
+    public SurveyResult end(@ModelAttribute("surveyResult") SurveyResult surveyResult) {
+        return surveyResult;
     }
 
-    @GetMapping("/secure/survey/create")
-    public String create() {
-        return "create";
-    }
 
 }

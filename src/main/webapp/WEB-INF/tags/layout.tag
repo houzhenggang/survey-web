@@ -35,6 +35,23 @@
     var CONTEXT_PATH = "${pageContext.request.contextPath}";
 </script>
 
+
+<style>
+    .custom-form {
+        margin: 10px;
+        padding: 10px;
+        background-color: #fcfcfc !important;
+    }
+
+    .question {
+        padding: 10px;
+    }
+
+    .fake-radio {
+        margin-right: 10px;
+    }
+</style>
+
 <!-- Bootstrap core JavaScript
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->

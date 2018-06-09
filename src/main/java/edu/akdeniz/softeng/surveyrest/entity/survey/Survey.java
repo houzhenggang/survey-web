@@ -21,8 +21,8 @@ public class Survey {
 
 
     public Survey() {
-        this.createDate = DateTimeHelper.getCurrentDay();
         this.questions = new NotNullList<>();
+        this.createDate = DateTimeHelper.getCurrentDay();
     }
 
     public String getSurveyId() {

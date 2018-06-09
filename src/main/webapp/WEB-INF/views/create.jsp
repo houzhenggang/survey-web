@@ -4,107 +4,118 @@
 
 <t:layout title="Creating New Survey">
 
-    <style>
-        .custom-form {
-            margin: 10px;
-            padding: 10px;
-            background-color: #fcfcfc !important;
-        }
-
-        .question {
-            padding: 10px;
-        }
-
-        .fake-radio {
-            margin-right: 10px;
-        }
-    </style>
-
-
-    <script type="text/ecmascript-6">
-        // shortid or an alternative can be added for unique id
-        $(function () {
-
-            var getQuestionId = (id) => {
-                let questionRegExp = /^(q-)([a-zA-Z0-9_-]*)(\|)/;
-                return parseInt(questionRegExp.exec(id)[2]);
-            }
-
-            var getChoiceId = (id) => {
-                let choiceRegExp = /(\|choice-)([a-zA-Z0-9_-]*)/;
-                return parseInt(choiceRegExp.exec(id)[2]);
-            }
-
-            var generateChoiceId = (id) => {
-                return 'q-' + getQuestionId(id) + '|choice-' + (getChoiceId(id) + 1)
-            }
-
-            var getNewChoiceElement = (prevId) => {
-                var newElementId = generateChoiceId(prevId);
-                return '<div class="form-group form-check-inline"> ' +
-                    '<i class="far fa-circle fake-radio"></i> ' +
-                    '<input type="text" class="form-control" id=' + newElementId + ' > ' +
-                    '</div>';
-            }
-
-            var getNewQuestionElement = (prevId) => {
-                let newElementId = (getQuestionId(prevId) + 1);
-                return '<div class="form-group card question"> ' +
-                    '<div class="form-group"> ' +
-                    '  <input type="text" class="form-control" id="q-' + newElementId + '|title" placeholder="Title of the Survey">  ' +
-                    '</div>  ' +
-                    '<div class="form-group form-check-inline"> ' +
-                    '  <i class="far fa-circle fake-radio"></i> ' +
-                    '  <input type="text" class="form-control" id="q-' + newElementId + '|choice-1" > ' +
-                    '</div>' +
-                    '<button type="button" class="btn btn-primary x">+</button>';
-            }
-
-            //delegated-event
-            $("body").on("click", "button.x", function (e) {
-                    e.preventDefault();
-                    var prev = $(e.target).prev();
-                    prev.after(getNewChoiceElement(prev.find('input').attr('id')))
-                }
-            );
-
-            $("#addQuestion").click(() => {
-                    var prev = $("#addQuestion").prev();
-                    prev.after(getNewQuestionElement(prev.find('input').attr('id')))
-                }
-            );
-
-        });
-    </script>
-
     <!-- survey -->
-    <form class="card custom-form">
+    <form class="card custom-form survey-form" action="<c:url value="/secure/survey/create"/>" method="POST">
+        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
         <div class="form-group">
-            <input type="text" class="form-control" id="surveyTitle" placeholder="Untitled Survey">
+            <label for="description">Survey Title</label>
+            <input type="text" class="form-control" id="title" placeholder="Untitled Survey" name="title"
+                   value="">
         </div>
         <div class="form-group">
-            <input type="text" class="form-control" id="surveyDescription" placeholder="Description">
+            <label for="description">Survey Description</label>
+            <input type="text" class="form-control" id="description" placeholder="Description" name="description"
+                   value="">
         </div>
-        <!--   question -->
-        <div class="form-group card question">
-            <div class="form-group">
-                <input type="text" class="form-control" id="questions[0]" placeholder="Title of the Survey">
-            </div>
-            <!-- choice -->
-            <div class="form-group form-check-inline">
-                <i class="far fa-circle fake-radio"></i>
-                <input type="text" class="form-control" id="q-1|choice-1">
-            </div>
-            <div class="form-group form-check-inline">
-                <i class="far fa-circle fake-radio"></i>
-                <input type="text" class="form-control" id="q-1|choice-2">
-            </div>
-            <button type="button" class="btn btn-primary x">+</button>
+        <div class="questions">
         </div>
-        <button type="button" id="addQuestion" class="btn btn-secondary">Add New Question</button>
-        <hr>1
-        <button type="submit" class="btn btn-default">Save</button>
+        <button type="button" class="btn btn-secondary add-question-btn" data-next="0">Add New Question</button>
+        <hr>
+        <input type="submit" class="btn btn-default" value="Save"/>
     </form>
+
+    <script type="text/javascript">
+        $(".survey-form").find(".add-choice-btn").on('click', appendChoice);
+
+        function appendChoice() {
+
+            let next = $(this).data("next");
+            let question = $(this).closest(".question").data("qindex");
+            let choices = $(this).closest(".question").find(".choices");
+            let id = 'answer' + next;
+
+            /**/
+            let label = document.createElement('label');
+            label.setAttribute('for', id);
+            label.innerText = 'Answer ' + next;
+
+
+            /**/
+            let i = document.createElement('i');
+            i.setAttribute('class', 'far fa-circle fake-radio');
+
+            // .........
+            let input = document.createElement('input');
+            input.setAttribute('type', 'text');
+            input.setAttribute('class', 'form-control');
+            input.setAttribute('name', 'questions[' + question + '].choices[' + next + '].content');
+            input.setAttribute('id', id);
+
+            // .........
+            let div = document.createElement('div');
+            div.setAttribute('class', 'col-lg-12 form-group form-check-inline');
+            div.appendChild(i);
+            div.appendChild(input);
+
+            /**/
+            choices.append(label);
+            choices.append(div);
+
+            $(this).data("next", next + 1);
+        }
+
+        $(".survey-form").find(".add-question-btn").on('click', function () {
+
+            let questions = $(this).parent().find(".questions");
+            let next = $(this).data("next");
+            let id = "question" + next;
+
+            // .........
+            let label = document.createElement("label");
+            label.setAttribute('for', id);
+            label.innerText = 'Question ' + next;
+
+            // .........
+            let input = document.createElement('input');
+            input.setAttribute('type', 'text');
+            input.setAttribute('class', 'form-control');
+            input.setAttribute('name', 'questions[' + next + '].title');
+            input.setAttribute('id', id);
+
+            let formGroup = document.createElement("div");
+            formGroup.setAttribute("class", "form-group");
+            formGroup.appendChild(input);
+
+            // .........
+            let choices = document.createElement("div");
+            choices.setAttribute("class", "choices");
+
+
+            // .........
+            let button = document.createElement("button");
+            button.setAttribute("type", "button");
+            button.setAttribute("class", "btn btn-primary add-choice-btn");
+            button.setAttribute("data-next", 0);
+            button.innerText = "Add Choice to Question " + next;
+            button.onclick = appendChoice;
+
+            // .........
+            let questionDiv = document.createElement("div");
+            questionDiv.setAttribute("class", "form-group card question");
+            questionDiv.setAttribute("data-qindex", next);
+
+            questionDiv.appendChild(label);
+            questionDiv.appendChild(formGroup);
+            questionDiv.appendChild(choices);
+            questionDiv.appendChild(button);
+
+            /**/
+            questions.append(questionDiv);
+            $(this).data("next", next + 1);
+        });
+
+
+    </script>
 
 
 </t:layout>

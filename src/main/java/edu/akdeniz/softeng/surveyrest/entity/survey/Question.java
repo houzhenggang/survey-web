@@ -72,7 +72,7 @@ public class Question {
     }
 
     public boolean single() {
-        return type.equalsIgnoreCase("singleline");
+        return false;
     }
 
 }
