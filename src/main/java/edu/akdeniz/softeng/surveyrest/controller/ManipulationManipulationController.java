@@ -56,7 +56,6 @@ public class ManipulationManipulationController {
     @ResponseBody
     @GetMapping("/secure/survey/reset")
     public List<Survey> resetDB() {
-        System.out.println("here");
         return surveyHelper.resetDB();
     }
 
