@@ -48,9 +48,9 @@
                             <c:set var="ac" value="${ac + 1}"/>
                         </c:forEach>
                     </div>
-                    <button type="button" class="btn btn-primary btn-block add-choice-btn" data-next="${ac}">Add Choice
-                        to
-                        Question ${qc}</button>
+                    <button type="button" class="btn btn-primary btn-block add-choice-btn" data-next="${ac}">
+                        Add Choice to Question ${qc + 1}
+                    </button>
 
                 </div>
                 <c:set var="qc" value="${qc + 1}"/>
@@ -133,7 +133,7 @@
             button.setAttribute("type", "button");
             button.setAttribute("class", "btn btn-primary add-choice-btn");
             button.setAttribute("data-next", 0);
-            button.innerText = "Add Choice to Question " + next;
+            button.innerText = "Add Choice to Question " + (next + 1);
             button.onclick = appendChoice;
 
             // .........

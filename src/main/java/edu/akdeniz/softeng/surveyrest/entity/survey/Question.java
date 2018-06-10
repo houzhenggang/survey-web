@@ -104,4 +104,15 @@ public class Question {
         return false;
     }
 
+    @Override
+    public String toString() {
+        return "Question{" +
+                "id='" + id + '\'' +
+                ", type='" + type + '\'' +
+                ", title='" + title + '\'' +
+                ", hint='" + hint + '\'' +
+                ", createDate=" + createDate +
+                ", choices=" + choices +
+                '}';
+    }
 }

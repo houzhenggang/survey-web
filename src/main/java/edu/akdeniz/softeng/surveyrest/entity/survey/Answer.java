@@ -66,4 +66,14 @@ public class Answer {
     public void setCreateDate(Date createDate) {
         this.createDate = createDate;
     }
+
+    @Override
+    public String toString() {
+        return "Answer{" +
+                "id='" + id + '\'' +
+                ", content='" + content + '\'' +
+                ", comment='" + comment + '\'' +
+                ", createDate=" + createDate +
+                '}';
+    }
 }

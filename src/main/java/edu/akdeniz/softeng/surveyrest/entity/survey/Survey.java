@@ -89,6 +89,12 @@ public class Survey {
 
     @Override
     public String toString() {
-        return getTitle() + " with id=[" + getSurveyId() + "]";
+        return "Survey{" +
+                "surveyId='" + surveyId + '\'' +
+                ", title='" + title + '\'' +
+                ", description='" + description + '\'' +
+                ", createDate=" + createDate +
+                ", questions=" + questions +
+                '}';
     }
 }

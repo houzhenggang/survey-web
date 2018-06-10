@@ -77,4 +77,15 @@ public class Result {
     public void setComment(String comment) {
         this.comment = comment;
     }
+
+    @Override
+    public String toString() {
+        return "Result{" +
+                "userId='" + userId + '\'' +
+                ", surveyId='" + surveyId + '\'' +
+                ", questionId='" + questionId + '\'' +
+                ", answerId='" + answerId + '\'' +
+                ", comment='" + comment + '\'' +
+                '}';
+    }
 }

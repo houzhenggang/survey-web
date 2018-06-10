@@ -5,7 +5,6 @@ import edu.akdeniz.softeng.surveyrest.service.SurveyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
 
@@ -25,7 +24,7 @@ public class HomeController {
     }
 
     @GetMapping(value = {"/", "/home"})
-    public String homePage(ModelMap model) {
+    public String homePage() {
         return "redirect:/surveys";
     }
 
@@ -35,25 +34,24 @@ public class HomeController {
         return "surveys";
     }
 
-    @GetMapping(value = {"/survey/{surveyId}", "/survey"})
+    @GetMapping(value = {"/survey/{surveyId}/take", "/survey/take"})
     public String apply(Model model, @PathVariable(required = false) String surveyId) {
         if (surveyId == null) {
             return "redirect:/surveys";
         }
         model.addAttribute("survey", surveyService.getSurvey(surveyId));
-        return "apply";
+        return "take";
     }
 
-    @PostMapping("/survey/end")
-    public SurveyResult end(@ModelAttribute("surveyResult") SurveyResult surveyResult) {
-        return surveyResult;
-    }
 
 
     /* Secured */
 
-    @GetMapping("/secure/survey/{surveyId}/edit")
-    public String edit(Model model, @PathVariable String surveyId) {
+    @GetMapping(value = {"/secure/survey/{surveyId}/edit", "/secure/survey/edit"})
+    public String edit(Model model, @PathVariable(required = false) String surveyId) {
+        if (surveyId == null) {
+            return "redirect:/surveys";
+        }
         model.addAttribute("survey", surveyService.getSurvey(surveyId));
         return "edit";
     }

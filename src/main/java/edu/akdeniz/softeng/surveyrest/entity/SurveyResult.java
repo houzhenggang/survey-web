@@ -12,6 +12,8 @@ import java.util.List;
  */
 public class SurveyResult {
 
+    private String surveyId;
+
     /**
      * results of user
      */
@@ -19,6 +21,14 @@ public class SurveyResult {
 
     public SurveyResult() {
         results = new NotNullList<>();
+    }
+
+    public String getSurveyId() {
+        return surveyId;
+    }
+
+    public void setSurveyId(String surveyId) {
+        this.surveyId = surveyId;
     }
 
     public List<Result> getResults() {

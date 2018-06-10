@@ -1,6 +1,7 @@
 package edu.akdeniz.softeng.surveyrest.service.manipulation;
 
 import edu.akdeniz.softeng.surveyrest.entity.Result;
+import edu.akdeniz.softeng.surveyrest.entity.SurveyResult;
 import edu.akdeniz.softeng.surveyrest.repository.ResultRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -34,6 +35,10 @@ public class ResultManipulationService {
 
     public void save(List<Result> results) {
         results.forEach(this::save);
+    }
+
+    public void save(SurveyResult surveyResult) {
+        save(surveyResult.getResults());
     }
 
 }

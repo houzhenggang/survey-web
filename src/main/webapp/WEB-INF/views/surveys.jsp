@@ -26,7 +26,7 @@
                     </li>
                 </sec:authorize>
                 <li class="list-group-item">
-                    <a href="<c:url value="/survey/${each.getSurveyId()}"/>">
+                    <a href="<c:url value="/survey/${each.getSurveyId()}/take"/>">
                         Apply
                     </a>
                 </li>

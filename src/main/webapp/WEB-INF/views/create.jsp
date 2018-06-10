@@ -3,24 +3,31 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <t:layout title="Creating New Survey">
-
-    <!-- survey -->
     <form class="card custom-form survey-form" action="<c:url value="/secure/survey/create"/>" method="POST">
         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+
+            <%-- Survey Title --%>
         <div class="form-group">
             <label for="description">Survey Title</label>
-            <input type="text" class="form-control" id="title" placeholder="Untitled Survey" name="title"
-                   value="">
+            <input type="text" class="form-control" id="title" placeholder="Untitled Survey" name="title"/>
         </div>
+
+            <%-- Survey Description --%>
         <div class="form-group">
             <label for="description">Survey Description</label>
-            <input type="text" class="form-control" id="description" placeholder="Description" name="description"
-                   value="">
+            <input type="text" class="form-control" id="description" placeholder="Description" name="description"/>
         </div>
+
+            <%-- Questions --%>
         <div class="questions">
         </div>
+        <hr/>
+
+            <%-- Add Question --%>
         <button type="button" class="btn btn-secondary add-question-btn" data-next="0">Add New Question</button>
-        <hr>
+        <hr/>
+
+            <%-- Save Survey --%>
         <input type="submit" class="btn btn-default" value="Save"/>
     </form>
 
@@ -73,7 +80,7 @@
             // .........
             let label = document.createElement("label");
             label.setAttribute('for', id);
-            label.innerText = 'Question ' + next;
+            label.innerText = 'Question ' + (next + 1);
 
             // .........
             let input = document.createElement('input');
@@ -96,7 +103,7 @@
             button.setAttribute("type", "button");
             button.setAttribute("class", "btn btn-primary add-choice-btn");
             button.setAttribute("data-next", 0);
-            button.innerText = "Add Choice to Question " + next;
+            button.innerText = "Add Choice to Question " + (next+1);
             button.onclick = appendChoice;
 
             // .........

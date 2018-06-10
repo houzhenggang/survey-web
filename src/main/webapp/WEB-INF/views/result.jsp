@@ -4,35 +4,34 @@
 
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
-<t:layout title="Applying ${each.getTitle()}">
+<t:layout title="Resulting Survey ${surveyModel.getSurvey().getTitle()}">
 
-    <h3>${survey.getTitle()}</h3>
-    <p>${survey.getDescription()}</p>
+    <h3>${surveyModel.getSurvey().getTitle()}</h3>
+    <p>${surveyModel.getSurvey().getDescription()}</p>
     <form action="<c:url value="/survey/end"/>" method="post">
-        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
         <c:set value="0" var="counter"/>
-        <c:forEach var="question" items="${survey.getQuestions()}">
+        <c:forEach var="questionModel" items="${surveyModel.getQuestionModelList()}">
             <div class="form-group card">
                 <div class="card-header">
-                        ${question.getTitle()}
+                        ${questionModel.getQuestion().getTitle()}
                 </div>
-                <input type="hidden" name="results[${counter}].userId" value="1"/>
-                <input type="hidden" name="results[${counter}].surveyId" value="${survey.getSurveyId()}"/>
-                <input type="hidden" name="results[${counter}].questionId" value="${question.getId()}"/>
                 <div class="card-body">
                     <c:if test="${question.single()}">
                         <input type="text" id="${answer.getId()}" name="results[${counter}].comment"
-                               placeholder="${question.getHint()}" class="p-2" style="width: 100%"/>
+                               placeholder="${question.getHint()}" class="p-2" style="width: 100%" disabled/>
                     </c:if>
                     <c:if test="${!question.single()}">
-                        <c:forEach var="answer" items="${question.getChoices()}">
+                        <c:forEach var="answerModel" items="${questionModel.getAnswerModelList()}">
                             <div class="custom-control custom-radio">
-                                <input type="radio" id="${answer.getId()}"
+                                <input type="radio" id="${answerModel.getAnswer().getId()}"
                                        name="results[${counter}].answerId"
-                                       value="${answer.getId()}"
+                                       value="${answerModel.getAnswer().getId()}"
+                                <c:if test="${answerModel.isSelected()}">
+                                       selected
+                                </c:if>
                                        class="custom-control-input">
-                                <label class="custom-control-label" for="${answer.getId()}">
-                                        ${answer.getContent()}
+                                <label class="custom-control-label" for="${answerModel.getAnswer().getId()}">
+                                        ${answerModel.getAnswer().getContent()}
                                 </label>
                             </div>
                         </c:forEach>

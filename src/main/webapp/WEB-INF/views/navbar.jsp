@@ -12,13 +12,19 @@
             <span class="navbar-toggler-icon"></span>
         </button>
 
+        <style>
+            .navbar i {
+                vertical-align: middle;
+            }
+        </style>
+
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="<c:url value="/home"/>">Home <span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item">
                     <a class="nav-link" href="<c:url value="/surveys"/>">
+                        <i class="material-icons">
+                            format_list_bulleted
+                        </i>
                         Surveys
                     </a>
                 </li>
@@ -27,7 +33,8 @@
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
                         <a class="nav-link" href="<c:url value="/secure/survey/create"/>">
-                            Create Survey
+                            New Survey
+                            <i class="material-icons">add</i>
                         </a>
                     </li>
                     <li class="nav-item">
