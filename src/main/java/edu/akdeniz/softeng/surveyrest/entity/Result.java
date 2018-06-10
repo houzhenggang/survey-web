@@ -26,7 +26,7 @@ public class Result {
     /**
      * which choice
      */
-    private String answerId;
+    private String choiceId;
 
     /**
      * for open-ended questions
@@ -62,12 +62,12 @@ public class Result {
         this.questionId = questionId;
     }
 
-    public String getAnswerId() {
-        return answerId;
+    public String getChoiceId() {
+        return choiceId;
     }
 
-    public void setAnswerId(String answerId) {
-        this.answerId = answerId;
+    public void setChoiceId(String choiceId) {
+        this.choiceId = choiceId;
     }
 
     public String getComment() {
@@ -84,7 +84,7 @@ public class Result {
                 "userId='" + userId + '\'' +
                 ", surveyId='" + surveyId + '\'' +
                 ", questionId='" + questionId + '\'' +
-                ", answerId='" + answerId + '\'' +
+                ", choiceId='" + choiceId + '\'' +
                 ", comment='" + comment + '\'' +
                 '}';
     }

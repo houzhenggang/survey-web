@@ -1,19 +1,19 @@
 package edu.akdeniz.softeng.surveyrest.model;
 
-import edu.akdeniz.softeng.surveyrest.entity.survey.Answer;
+import edu.akdeniz.softeng.surveyrest.entity.survey.Choice;
 
 public class AnswerModel {
 
-    private final Answer answer;
+    private final Choice choice;
     private final boolean selected;
 
-    public AnswerModel(Answer answer, boolean selected) {
-        this.answer = answer;
+    public AnswerModel(Choice choice, boolean selected) {
+        this.choice = choice;
         this.selected = selected;
     }
 
-    public Answer getAnswer() {
-        return answer;
+    public Choice getChoice() {
+        return choice;
     }
 
     public boolean isSelected() {
@@ -23,7 +23,7 @@ public class AnswerModel {
     @Override
     public String toString() {
         return "AnswerModel{" +
-                "answer=" + answer +
+                "choice=" + choice +
                 ", selected=" + selected +
                 '}';
     }

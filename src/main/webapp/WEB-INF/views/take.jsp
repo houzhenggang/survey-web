@@ -22,18 +22,18 @@
                 <input type="hidden" name="results[${counter}].questionId" value="${question.getId()}"/>
                 <div class="card-body">
                     <c:if test="${question.single()}">
-                        <input type="text" id="${answer.getId()}" name="results[${counter}].comment"
+                        <input type="text" id="${choice.getId()}" name="results[${counter}].comment"
                                placeholder="${question.getHint()}" class="p-2" style="width: 100%"/>
                     </c:if>
                     <c:if test="${!question.single()}">
-                        <c:forEach var="answer" items="${question.getChoices()}">
+                        <c:forEach var="choice" items="${question.getChoices()}">
                             <div class="custom-control custom-radio">
-                                <input type="radio" id="${answer.getId()}"
-                                       name="results[${counter}].answerId"
-                                       value="${answer.getId()}"
+                                <input type="radio" id="${choice.getId()}"
+                                       name="results[${counter}].choiceId"
+                                       value="${choice.getId()}"
                                        class="custom-control-input">
-                                <label class="custom-control-label" for="${answer.getId()}">
-                                        ${answer.getContent()}
+                                <label class="custom-control-label" for="${choice.getId()}">
+                                        ${choice.getContent()}
                                 </label>
                             </div>
                         </c:forEach>

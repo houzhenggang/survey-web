@@ -3,7 +3,7 @@ package edu.akdeniz.softeng.surveyrest.service;
 import com.maemresen.jutils.collections.NotNullList;
 import com.maemresen.jutils.helper.ConsoleHelper;
 import edu.akdeniz.softeng.surveyrest.entity.SurveyResult;
-import edu.akdeniz.softeng.surveyrest.entity.survey.Answer;
+import edu.akdeniz.softeng.surveyrest.entity.survey.Choice;
 import edu.akdeniz.softeng.surveyrest.entity.survey.Question;
 import edu.akdeniz.softeng.surveyrest.entity.survey.Survey;
 import edu.akdeniz.softeng.surveyrest.model.AnswerModel;
@@ -68,10 +68,10 @@ public class SurveyService {
         return questionModelList;
     }
 
-    private List<AnswerModel> getAnswerModelList(String surveyId, String questionId, List<Answer> answerList) {
+    private List<AnswerModel> getAnswerModelList(String surveyId, String questionId, List<Choice> choiceList) {
         List<AnswerModel> answerModelList = new NotNullList<>();
-        for (Answer answer : answerList) {
-            answerModelList.add(new AnswerModel(answer, resultService.selected(surveyId, questionId, answer.getId())));
+        for (Choice choice : choiceList) {
+            answerModelList.add(new AnswerModel(choice, resultService.selected(surveyId, questionId, choice.getId())));
         }
         return answerModelList;
     }

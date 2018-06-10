@@ -39,7 +39,7 @@
             let next = $(this).data("next");
             let question = $(this).closest(".question").data("qindex");
             let choices = $(this).closest(".question").find(".choices");
-            let id = 'answer' + next;
+            let id = 'choice' + next;
 
             /**/
             let label = document.createElement('label');

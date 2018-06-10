@@ -41,7 +41,7 @@ public class Question {
     /**
      * choices of the question
      */
-    private List<Answer> choices;
+    private List<Choice> choices;
 
 
     public Question() {
@@ -77,7 +77,7 @@ public class Question {
         this.hint = hint;
     }
 
-    public List<Answer> getChoices() {
+    public List<Choice> getChoices() {
         return choices;
     }
 
@@ -90,7 +90,7 @@ public class Question {
         this.createDate = createDate;
     }
 
-    public void setChoices(List<Answer> choices) {
+    public void setChoices(List<Choice> choices) {
         this.choices = new NotNullList<>(choices);
     }
 

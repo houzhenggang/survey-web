@@ -17,14 +17,14 @@
                 </div>
                 <div class="card-body">
                     <c:if test="${question.single()}">
-                        <input type="text" id="${answer.getId()}" name="results[${counter}].comment"
+                        <input type="text" id="${choice.getId()}" name="results[${counter}].comment"
                                placeholder="${question.getHint()}" class="p-2" style="width: 100%" disabled/>
                     </c:if>
                     <c:if test="${!question.single()}">
                         <c:forEach var="answerModel" items="${questionModel.getAnswerModelList()}">
                             <div class="custom-control custom-radio">
                                 <input type="radio" id="${answerModel.getAnswer().getId()}"
-                                       name="results[${counter}].answerId"
+                                       name="results[${counter}].choiceId"
                                        value="${answerModel.getAnswer().getId()}"
                                 <c:if test="${answerModel.isSelected()}">
                                        selected

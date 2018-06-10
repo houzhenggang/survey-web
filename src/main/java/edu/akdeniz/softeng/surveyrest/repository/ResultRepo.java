@@ -11,6 +11,6 @@ import java.util.List;
  */
 public interface ResultRepo extends MongoRepository<Result, String> {
 
-    List<Result> findBySurveyIdAndQuestionIdAndAnswerId(String surveyId, String questionId, String answerId);
+    List<Result> findBySurveyIdAndQuestionIdAndChoiceId(String surveyId, String questionId, String answerId);
 
 }

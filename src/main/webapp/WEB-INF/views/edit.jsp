@@ -36,14 +36,14 @@
                     <!-- choice -->
                     <div class="choices">
                         <c:set var="ac" value="0"/>
-                        <c:forEach var="answer" items="${question.getChoices()}">
-                            <input type="hidden" value="${answer.getId()}" name="questions[${qc}].choices[${ac}].id">
-                            <label for="answer${ac}">Choice ${ac+1}</label>
+                        <c:forEach var="choice" items="${question.getChoices()}">
+                            <input type="hidden" value="${choice.getId()}" name="questions[${qc}].choices[${ac}].id">
+                            <label for="choice${ac}">Choice ${ac+1}</label>
                             <div class="col-lg-12 form-group form-check-inline">
                                 <i class="far fa-circle fake-radio"></i>
                                 <input type="text" class="form-control" name="questions[${qc}].choices[${ac}].content"
-                                       id="answer${ac}"
-                                       value="${answer.getContent()}">
+                                       id="choice${ac}"
+                                       value="${choice.getContent()}">
                             </div>
                             <c:set var="ac" value="${ac + 1}"/>
                         </c:forEach>
@@ -69,7 +69,7 @@
             let next = $(this).data("next");
             let question = $(this).closest(".question").data("qindex");
             let choices = $(this).closest(".question").find(".choices");
-            let id = 'answer' + next;
+            let id = 'choice' + next;
 
             /**/
             let label = document.createElement('label');

@@ -11,12 +11,12 @@ import java.util.UUID;
  * @author maemresen
  */
 @Document
-public class Answer {
+public class Choice {
 
     @Id
     private String id = UUID.randomUUID().toString();
     /**
-     * choice text, e.g. "This is Answer"
+     * choice text, e.g. "This is Choice"
      */
     private String content;
 
@@ -30,7 +30,7 @@ public class Answer {
      */
     private Date createDate;
 
-    public Answer() {
+    public Choice() {
         createDate = DateTimeHelper.getCurrentDay();
     }
 
@@ -69,7 +69,7 @@ public class Answer {
 
     @Override
     public String toString() {
-        return "Answer{" +
+        return "Choice{" +
                 "id='" + id + '\'' +
                 ", content='" + content + '\'' +
                 ", comment='" + comment + '\'' +

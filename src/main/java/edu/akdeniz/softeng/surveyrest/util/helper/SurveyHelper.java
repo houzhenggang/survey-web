@@ -1,7 +1,7 @@
 package edu.akdeniz.softeng.surveyrest.util.helper;
 
 import com.maemresen.jutils.helper.ConsoleHelper;
-import edu.akdeniz.softeng.surveyrest.entity.survey.Answer;
+import edu.akdeniz.softeng.surveyrest.entity.survey.Choice;
 import edu.akdeniz.softeng.surveyrest.entity.survey.Question;
 import edu.akdeniz.softeng.surveyrest.entity.survey.Survey;
 import edu.akdeniz.softeng.surveyrest.service.ResultService;
@@ -18,7 +18,7 @@ import java.util.List;
 
 /**
  * @author maemresen
- *
+ * <p>
  * Component consist of helper funtions
  * reset all data, clear all data etc.
  */
@@ -57,23 +57,20 @@ public class SurveyHelper {
 
         clearDB();
 
-        // setting survey 1...
-        Survey survey = new Survey();
-        survey.setTitle("Survey Title");
-        survey.setDescription("Survey Description");
+        // setting answers ...
+        Choice a1 = new Choice();
+        a1.setContent("Choice 1");
+
+        Choice a2 = new Choice();
+        a2.setContent("Choice 2");
 
         // setting question 1...
         Question q1 = new Question();
-        q1.setType("singleLine");
+        q1.setType("multiline");
         q1.setTitle("Would you like to add something?");
         q1.setHint("it could be better, if...");
+        q1.setChoices(Arrays.asList(a1, a2));
 
-        // setting answers ...
-        Answer a1 = new Answer();
-        a1.setContent("Answer 1");
-
-        Answer a2 = new Answer();
-        a2.setContent("Answer 2");
 
         // setting question 2...
         Question q2 = new Question();
@@ -82,9 +79,15 @@ public class SurveyHelper {
         q2.setHint("it could be better, if...");
         q2.setChoices(Arrays.asList(a1, a2));
 
+        // setting survey 1...
+        Survey survey = new Survey();
+        survey.setTitle("Survey Title");
+        survey.setDescription("Survey Description");
         survey.setQuestions(Arrays.asList(q1, q2));
         surveyManipulationService.save(survey);
 
+
+        // setting survey 2...
         survey = new Survey();
         survey.setTitle("Survey Title 2");
         survey.setDescription("Survey Description 2");
@@ -97,6 +100,4 @@ public class SurveyHelper {
         System.out.println(JsonHelper.objectToJson(surveyService.getSurveyList()));
         return surveyService.getSurveyList();
     }
-
-
 }
