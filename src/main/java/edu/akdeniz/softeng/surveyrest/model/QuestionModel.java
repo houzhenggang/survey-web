@@ -8,11 +8,21 @@ import java.util.List;
 public class QuestionModel {
 
     private final Question question;
-    private final List<AnswerModel> answerModelList;
+    private final List<Answer> answerList;
+    private final String comment;
 
-    public QuestionModel(Question question, List<AnswerModel> answerModelList) {
+    public QuestionModel(Question question, String comment) {
+        this(question, NotNullList.emptyList(), comment);
+    }
+
+    public QuestionModel(Question question, List<Answer> answerList) {
+        this(question, answerList, "");
+    }
+
+    public QuestionModel(Question question, List<Answer> answerList, String comment) {
         this.question = question;
-        this.answerModelList = new NotNullList<>(answerModelList);
+        this.answerList = new NotNullList<>(answerList);
+        this.comment = comment;
     }
 
 
@@ -20,15 +30,20 @@ public class QuestionModel {
         return question;
     }
 
-    public List<AnswerModel> getAnswerModelList() {
-        return answerModelList;
+    public List<Answer> getAnswerList() {
+        return answerList;
+    }
+
+    public String getComment() {
+        return comment;
     }
 
     @Override
     public String toString() {
         return "QuestionModel{" +
                 "question=" + question +
-                ", answerModelList=" + answerModelList +
+                ", answerList=" + answerList +
+                ", comment='" + comment + '\'' +
                 '}';
     }
 }

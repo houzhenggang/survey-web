@@ -1,6 +1,7 @@
 package edu.akdeniz.softeng.surveyrest.controller;
 
 import edu.akdeniz.softeng.surveyrest.entity.SurveyResult;
+import edu.akdeniz.softeng.surveyrest.entity.survey.Survey;
 import edu.akdeniz.softeng.surveyrest.service.SurveyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -39,7 +40,11 @@ public class HomeController {
         if (surveyId == null) {
             return "redirect:/surveys";
         }
-        model.addAttribute("survey", surveyService.getSurvey(surveyId));
+        Survey survey = surveyService.getSurvey(surveyId);
+        if (survey == null) {
+            return "redirect:/surveys";
+        }
+        model.addAttribute("survey", survey);
         return "take";
     }
 

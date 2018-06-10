@@ -2,6 +2,7 @@ package edu.akdeniz.softeng.surveyrest.entity.survey;
 
 import com.maemresen.jutils.collections.NotNullList;
 import com.maemresen.jutils.helper.DateTimeHelper;
+import edu.akdeniz.softeng.surveyrest.constant.Constants.QuestionType;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -57,9 +58,18 @@ public class Question {
         return type;
     }
 
+    public QuestionType getTypeEnum() {
+        return QuestionType.valueOf(type);
+    }
+
     public void setType(String type) {
         this.type = type;
     }
+
+    public void setType(QuestionType type) {
+        setType(type.name());
+    }
+
 
     public String getTitle() {
         return title;
@@ -101,7 +111,7 @@ public class Question {
     @SuppressWarnings("unused")
     // TODO : DO NOT DELETE. JSP files are using
     public boolean single() {
-        return false;
+        return getTypeEnum() == QuestionType.OPEN_ENDED;
     }
 
     @Override

@@ -1,12 +1,21 @@
 package edu.akdeniz.softeng.surveyrest.entity;
 
+import org.springframework.data.mongodb.core.mapping.Document;
 
 /**
  * @author maemresen
  * <p>
  * Model to store answer of user for one question at on survey
  */
+@Document
 public class Result {
+
+    /**
+     * uid represents taking survey action
+     * Each answer given to a question during taking the survey has same uid
+     */
+    private String uid;
+
 
     /**
      * uid of the user who gives answer
@@ -36,6 +45,14 @@ public class Result {
 
     public Result() {
 
+    }
+
+    public String getUid() {
+        return uid;
+    }
+
+    public void setUid(String uid) {
+        this.uid = uid;
     }
 
     public String getUserId() {

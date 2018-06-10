@@ -16,22 +16,24 @@
                         ${questionModel.getQuestion().getTitle()}
                 </div>
                 <div class="card-body">
-                    <c:if test="${question.single()}">
-                        <input type="text" id="${choice.getId()}" name="results[${counter}].comment"
-                               placeholder="${question.getHint()}" class="p-2" style="width: 100%" disabled/>
+                    <c:if test="${questionModel.getQuestion().single()}">
+                        <input type="text"
+                               placeholder="${questionModel.getQuestion().getHint()}" class="p-2" style="width: 100%"
+                               disabled value="${questionModel.getComment()}"/>
                     </c:if>
-                    <c:if test="${!question.single()}">
-                        <c:forEach var="answerModel" items="${questionModel.getAnswerModelList()}">
+                    <c:if test="${!questionModel.getQuestion().single()}">
+                        <c:forEach var="answer" items="${questionModel.getAnswerList()}">
                             <div class="custom-control custom-radio">
-                                <input type="radio" id="${answerModel.getAnswer().getId()}"
+                                <input type="radio" id="${answer.getChoice().getId()}"
                                        name="results[${counter}].choiceId"
-                                       value="${answerModel.getAnswer().getId()}"
-                                <c:if test="${answerModel.isSelected()}">
-                                       selected
+                                       value="${answer.getChoice().getId()}"
+                                <c:if test="${answer.isSelected()}">
+                                       checked
                                 </c:if>
+                                       disabled
                                        class="custom-control-input">
-                                <label class="custom-control-label" for="${answerModel.getAnswer().getId()}">
-                                        ${answerModel.getAnswer().getContent()}
+                                <label class="custom-control-label" for="${answer.getChoice().getId()}">
+                                        ${answer.getChoice().getContent()}
                                 </label>
                             </div>
                         </c:forEach>

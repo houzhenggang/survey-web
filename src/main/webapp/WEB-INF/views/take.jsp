@@ -10,13 +10,13 @@
     <p>${survey.getDescription()}</p>
     <form action="<c:url value="/survey/end"/>" method="post">
         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+        <input type="hidden" name="surveyId" value="${survey.getSurveyId()}"/>
         <c:set value="0" var="counter"/>
         <c:forEach var="question" items="${survey.getQuestions()}">
             <div class="form-group card">
                 <div class="card-header">
                         ${question.getTitle()}
                 </div>
-                <input type="hidden" name="surveyId" value="${survey.getSurveyId()}"/>
                 <input type="hidden" name="results[${counter}].userId" value="1"/>
                 <input type="hidden" name="results[${counter}].surveyId" value="${survey.getSurveyId()}"/>
                 <input type="hidden" name="results[${counter}].questionId" value="${question.getId()}"/>

@@ -1,13 +1,11 @@
 package edu.akdeniz.softeng.surveyrest.controller;
 
-import com.maemresen.jutils.helper.ConsoleHelper;
 import edu.akdeniz.softeng.surveyrest.entity.SurveyResult;
 import edu.akdeniz.softeng.surveyrest.entity.survey.Survey;
 import edu.akdeniz.softeng.surveyrest.model.SurveyModel;
 import edu.akdeniz.softeng.surveyrest.service.SurveyService;
 import edu.akdeniz.softeng.surveyrest.service.manipulation.ResultManipulationService;
 import edu.akdeniz.softeng.surveyrest.service.manipulation.SurveyManipulationService;
-import edu.akdeniz.softeng.surveyrest.util.helper.JsonHelper;
 import edu.akdeniz.softeng.surveyrest.util.helper.SurveyHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,11 +14,12 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+
 /**
  * @author maemresen
  */
 @Controller
-public class ManipulationManipulationController {
+public class ManipulationController {
 
     private final SurveyHelper surveyHelper;
     private final SurveyService surveyService;
@@ -28,7 +27,7 @@ public class ManipulationManipulationController {
     private final ResultManipulationService resultManipulationService;
 
     @Autowired
-    public ManipulationManipulationController(SurveyHelper surveyHelper, SurveyService surveyService, SurveyManipulationService surveyManipulationService, ResultManipulationService resultManipulationService) {
+    public ManipulationController(SurveyHelper surveyHelper, SurveyService surveyService, SurveyManipulationService surveyManipulationService, ResultManipulationService resultManipulationService) {
         this.surveyHelper = surveyHelper;
         this.surveyService = surveyService;
         this.surveyManipulationService = surveyManipulationService;
@@ -48,22 +47,26 @@ public class ManipulationManipulationController {
     }
 
     @ResponseBody
-    @GetMapping("/secure/survey/clear")
+    @GetMapping("/survey/clear")
     public List<Survey> clearDB() {
         return surveyHelper.clearDB();
     }
 
     @ResponseBody
-    @GetMapping("/secure/survey/reset")
+    @GetMapping("/survey/reset")
     public List<Survey> resetDB() {
         return surveyHelper.resetDB();
     }
 
-    @ResponseBody
     @PostMapping("/survey/end")
-    public String end(@ModelAttribute("surveyResult") SurveyResult surveyResult, Model model) {
-        resultManipulationService.save(surveyResult);
-        model.addAttribute("surveyModel", surveyService.getSurveyModelBySurveyId(surveyResult));
+    public String end(@ModelAttribute("surveyResult") SurveyResult surveyResult, @RequestParam("surveyId") String surveyId, Model model) {
+        String uid = resultManipulationService.save(surveyResult);
+        SurveyModel surveyModel = surveyService.getSurveyModelBySurveyResult(uid, surveyId);
+        if (surveyModel == null) {
+            model.addAttribute("errMsg", "No Result Found");
+            return "error";
+        }
+        model.addAttribute("surveyModel", surveyModel);
         return "result";
     }
 

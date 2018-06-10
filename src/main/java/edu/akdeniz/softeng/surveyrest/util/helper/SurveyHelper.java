@@ -1,6 +1,7 @@
 package edu.akdeniz.softeng.surveyrest.util.helper;
 
 import com.maemresen.jutils.helper.ConsoleHelper;
+import edu.akdeniz.softeng.surveyrest.constant.Constants;
 import edu.akdeniz.softeng.surveyrest.entity.survey.Choice;
 import edu.akdeniz.softeng.surveyrest.entity.survey.Question;
 import edu.akdeniz.softeng.surveyrest.entity.survey.Survey;
@@ -64,9 +65,15 @@ public class SurveyHelper {
         Choice a2 = new Choice();
         a2.setContent("Choice 2");
 
+        Choice a3 = new Choice();
+        a3.setContent("Choice 3");
+
+        Choice a4 = new Choice();
+        a4.setContent("Choice 4");
+
         // setting question 1...
         Question q1 = new Question();
-        q1.setType("multiline");
+        q1.setType(Constants.QuestionType.SINGLE_CHOICE);
         q1.setTitle("Would you like to add something?");
         q1.setHint("it could be better, if...");
         q1.setChoices(Arrays.asList(a1, a2));
@@ -74,18 +81,23 @@ public class SurveyHelper {
 
         // setting question 2...
         Question q2 = new Question();
-        q2.setType("multiline");
+        q2.setType(Constants.QuestionType.SINGLE_CHOICE);
         q2.setTitle("Other Questions");
         q2.setHint("it could be better, if...");
-        q2.setChoices(Arrays.asList(a1, a2));
+        q2.setChoices(Arrays.asList(a3, a4));
+
+        // setting question 3...
+        Question q3 = new Question();
+        q3.setType(Constants.QuestionType.OPEN_ENDED);
+        q3.setTitle("Would you like to add something?");
+        q3.setHint("it could be better, if...");
 
         // setting survey 1...
         Survey survey = new Survey();
         survey.setTitle("Survey Title");
         survey.setDescription("Survey Description");
-        survey.setQuestions(Arrays.asList(q1, q2));
+        survey.setQuestions(Arrays.asList(q1, q2, q3));
         surveyManipulationService.save(survey);
-
 
         // setting survey 2...
         survey = new Survey();
@@ -93,7 +105,6 @@ public class SurveyHelper {
         survey.setDescription("Survey Description 2");
         survey.setQuestions(Collections.singletonList(q2));
         surveyManipulationService.save(survey);
-
 
         // printing out...
         ConsoleHelper.startSection("Survey List");

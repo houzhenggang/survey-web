@@ -3,7 +3,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <t:layout title="Anasayfa">
-    Unhandled Exception Occurred
+    <div class="alert alert-danger">
+            ${errMsg}
+    </div>
+
 </t:layout>
 
 

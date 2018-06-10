@@ -32,4 +32,8 @@ public class Constants {
         }
     }
 
+    public enum QuestionType {
+        OPEN_ENDED, SINGLE_CHOICE, MULTI_CHOICE
+    }
+
 }

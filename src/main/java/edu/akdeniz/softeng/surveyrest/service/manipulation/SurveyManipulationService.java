@@ -3,7 +3,9 @@ package edu.akdeniz.softeng.surveyrest.service.manipulation;
 import edu.akdeniz.softeng.surveyrest.entity.survey.Survey;
 import edu.akdeniz.softeng.surveyrest.repository.SurveyRepo;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
  * @author maemresen
@@ -11,7 +13,8 @@ import org.springframework.stereotype.Service;
  * Manipulation Service to manipulate surveys.
  * creating, editing, deleting etc.
  */
-@Service
+@Controller
+@RequestMapping("/service/manipulation")
 public class SurveyManipulationService {
 
     private final SurveyRepo surveyRepo;

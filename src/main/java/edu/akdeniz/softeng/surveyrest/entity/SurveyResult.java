@@ -12,7 +12,6 @@ import java.util.List;
  */
 public class SurveyResult {
 
-    private String surveyId;
 
     /**
      * results of user
@@ -23,13 +22,6 @@ public class SurveyResult {
         results = new NotNullList<>();
     }
 
-    public String getSurveyId() {
-        return surveyId;
-    }
-
-    public void setSurveyId(String surveyId) {
-        this.surveyId = surveyId;
-    }
 
     public List<Result> getResults() {
         return results;
@@ -37,5 +29,12 @@ public class SurveyResult {
 
     public void setResults(List<Result> results) {
         this.results = new NotNullList<>(results);
+    }
+
+    @Override
+    public String toString() {
+        return "SurveyResult{" +
+                ", results=" + results +
+                '}';
     }
 }
