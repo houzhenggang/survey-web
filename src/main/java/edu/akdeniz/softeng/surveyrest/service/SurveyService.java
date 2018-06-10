@@ -55,6 +55,13 @@ public class SurveyService {
 
     /**/
 
+    /**
+     * find survey results for given survey session
+     *
+     * @param uid      id of survey session
+     * @param surveyId id of survey
+     * @return answers given to the questions
+     */
     public SurveyModel getSurveyModelBySurveyResult(String uid, String surveyId) {
         Survey survey = getSurvey(surveyId);
         if (survey == null) {
