@@ -9,6 +9,9 @@ import org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfigurat
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 @SpringBootApplication
 @EnableAutoConfiguration(exclude = {DataSourceAutoConfiguration.class,
         HibernateJpaAutoConfiguration.class,
@@ -19,6 +22,7 @@ public class SurveyRestApp extends SpringBootServletInitializer {
     protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
         return application.sources(SurveyRestApp.class);
     }
+
 
     public static void main(String[] args) throws Exception {
         SpringApplication.run(SurveyRestApp.class, args);

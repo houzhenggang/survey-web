@@ -7,7 +7,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.logging.Logger;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 
 /**
@@ -19,8 +21,7 @@ import java.util.logging.Logger;
 public class HomeController {
 
 
-    private static final Logger LOGGER = Logger.getLogger(HomeController.class.getName());
-
+    private final Logger log = LoggerFactory.getLogger(this.getClass());
 
     private final SurveyService surveyService;
 
@@ -36,6 +37,7 @@ public class HomeController {
 
     @GetMapping("/surveys")
     public String surveys(Model model) {
+        log.info("hello world");
         model.addAttribute("surveyList", surveyService.getSurveyList());
         return "surveys";
     }
