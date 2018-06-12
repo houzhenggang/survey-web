@@ -45,10 +45,12 @@ public class HomeController {
     @GetMapping(value = {"/survey/{surveyId}/take", "/survey/take"})
     public String apply(Model model, @PathVariable(required = false) String surveyId) {
         if (surveyId == null) {
+            log.warn("SurveyId is empty");
             return "redirect:/surveys";
         }
         Survey survey = surveyService.getSurvey(surveyId);
         if (survey == null) {
+            log.warn(String.format("Survey not found with id=[%d]", surveyId));
             return "redirect:/surveys";
         }
         model.addAttribute("survey", survey);
