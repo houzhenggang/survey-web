@@ -23,7 +23,8 @@ import java.util.Collections;
  * Users are stored in Active Directory Server.
  */
 @Configuration
-public class WebSecurityConf extends WebSecurityConfigurerAdapter {
+@Profile("prod")
+public class WebSecurityProdConf extends WebSecurityConfigurerAdapter {
 
     @Value("${ad.domain}")
     private String AD_DOMAIN;

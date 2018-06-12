@@ -4,6 +4,13 @@
 
 <t:layout title="Editing ${each.getTitle()}">
 
+    <c:if test="${!empty(msg)}">
+        <div class="alert alert-${status}">
+                ${msg}
+        </div>
+    </c:if>
+    <hr/>
+
     <!-- survey -->
     <form class="card custom-form survey-form" action="<c:url value="/secure/survey/save"/>" method="post">
         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
