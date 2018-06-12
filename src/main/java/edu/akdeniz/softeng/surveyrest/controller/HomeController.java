@@ -31,13 +31,11 @@ public class HomeController {
 
     @GetMapping(value = {"/", "/home"})
     public String homePage() {
-        LOGGER.info("redirecting home page .............");
         return "redirect:/surveys";
     }
 
     @GetMapping("/surveys")
     public String surveys(Model model) {
-        LOGGER.info("home page .............");
         model.addAttribute("surveyList", surveyService.getSurveyList());
         return "surveys";
     }

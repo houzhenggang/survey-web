@@ -49,3 +49,4 @@ Using generated security password: 64f2e9e0-193c-43a6-8ac3-98b47a9e3997
 %clr(2018-06-12 22:30:04.123){yellow} INFO  [restartedMain] annotation.AnnotationMBeanExporter [] - Registering beans for JMX exposure on startup
 %clr(2018-06-12 22:30:04.162){yellow} INFO  [restartedMain] tomcat.TomcatWebServer [] - Tomcat started on port(s): 9000 (http) with context path ''
 %clr(2018-06-12 22:30:04.166){yellow} INFO  [restartedMain] surveyrest.SurveyRestApp [] - Started SurveyRestApp in 3.62 seconds (JVM running for 4.422)
+%clr(2018-06-12 22:51:56.603){yellow} INFO  [cluster-ClusterId{value='5b201f3ba8027c2c34827264', description='null'}-188.166.54.250:27017] driver.connection [] - Opened connection [connectionId{localValue:2, serverValue:1777}] to 188.166.54.250:27017
