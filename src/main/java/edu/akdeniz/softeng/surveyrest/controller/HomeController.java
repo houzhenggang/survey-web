@@ -36,7 +36,7 @@ public class HomeController {
     }
 
     @GetMapping(value = {"/survey/{surveyId}/take", "/survey/take"})
-    public String apply(Model model, @PathVariable(required = false) String surveyId) {
+    public String take(Model model, @PathVariable(required = false) String surveyId) {
         if (surveyId == null) {
             return "redirect:/surveys";
         }
