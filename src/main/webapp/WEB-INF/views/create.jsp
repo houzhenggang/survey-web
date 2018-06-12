@@ -44,7 +44,7 @@
             /**/
             let label = document.createElement('label');
             label.setAttribute('for', id);
-            label.innerText = 'Choice ' + (next + 1);
+            label.innerText = 'Choice ' + next;
 
 
             /**/
@@ -75,7 +75,7 @@
 
             let questions = $(this).parent().find(".questions");
             let next = $(this).data("next");
-            let id = "question" + (next + 1);
+            let id = "question" + next;
 
             // .........
             let label = document.createElement("label");
@@ -103,7 +103,7 @@
             button.setAttribute("type", "button");
             button.setAttribute("class", "btn btn-primary add-choice-btn");
             button.setAttribute("data-next", 0);
-            button.innerText = "Add Choice to Question " + (next + 1);
+            button.innerText = "Add Choice to Question " + (next+1);
             button.onclick = appendChoice;
 
             // .........

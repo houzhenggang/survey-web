@@ -6,10 +6,6 @@
 
 <t:layout title="Resulting Survey ${surveyModel.getSurvey().getTitle()}">
 
-    <div class="alert alert-success">
-        Thank you for participating in our survey. Your answers have been saved to our system.
-    </div>
-    <hr>
     <h3>${surveyModel.getSurvey().getTitle()}</h3>
     <p>${surveyModel.getSurvey().getDescription()}</p>
     <form action="<c:url value="/survey/end"/>" method="post">
