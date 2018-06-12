@@ -61,7 +61,6 @@
             <artifactId>spring-boot-starter-data-mongodb</artifactId>
         </dependency>
 
-
         <!-- JSON Output -->
         <dependency>
             <groupId>com.jayway.jsonpath</groupId>
