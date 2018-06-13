@@ -43,7 +43,7 @@ public class SecurityHelper {
     public static String getUserName() {
         UserDetails userDetails = getPrincipal();
         if (userDetails == null) {
-            return "";
+            return "Guest";
         }
         return userDetails.getUsername();
     }

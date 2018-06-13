@@ -2,6 +2,7 @@ package edu.akdeniz.softeng.surveyrest.controller;
 
 import edu.akdeniz.softeng.surveyrest.entity.survey.Survey;
 import edu.akdeniz.softeng.surveyrest.service.SurveyService;
+import edu.akdeniz.softeng.surveyrest.util.helper.SecurityHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,9 +21,7 @@ import org.slf4j.LoggerFactory;
 @Controller
 public class HomeController {
 
-
     private final Logger log = LoggerFactory.getLogger(this.getClass());
-
     private final SurveyService surveyService;
 
     @Autowired
@@ -37,8 +36,8 @@ public class HomeController {
 
     @GetMapping("/surveys")
     public String surveys(Model model) {
-        log.info("hello world");
         model.addAttribute("surveyList", surveyService.getSurveyList());
+        log.info(String.format("Surveys listed from [%s]",SecurityHelper.getUserName()));
         return "surveys";
     }
 
@@ -64,6 +63,7 @@ public class HomeController {
     @GetMapping(value = {"/secure/survey/{surveyId}/edit", "/secure/survey/edit"})
     public String edit(Model model, @PathVariable(required = false) String surveyId) {
         if (surveyId == null) {
+            log.warn(String.format("Survey not found with id=[%d]", surveyId));
             return "redirect:/surveys";
         }
         model.addAttribute("survey", surveyService.getSurvey(surveyId));
@@ -72,6 +72,7 @@ public class HomeController {
 
     @GetMapping("/secure/survey/create")
     public String create() {
+        log.info("New survey created.");
         return "create";
     }
 

@@ -25,7 +25,6 @@ public class WebSecurityAlphaConf extends WebSecurityConfigurerAdapter {
         auth.inMemoryAuthentication().withUser(Constants.Credentials.USER_NAME).password(Constants.Credentials.ENCRYPTED_USER_PASS).authorities("Survey", "Admin");
     }
 
-
     @Bean
     public BCryptPasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
@@ -39,7 +38,7 @@ public class WebSecurityAlphaConf extends WebSecurityConfigurerAdapter {
                 .antMatchers("/", "/home", "/survey/**").permitAll()
                 .antMatchers("/secure/**").access("hasAnyAuthority('Survey')")
                 .and().formLogin().loginPage("/login")
-                .usernameParameter("ssoId").passwordParameter("password")
+                .usernameParameter("ssoId").passwordParameter("password").successHandler(new CustomAuthenticationSuccessHandler())
                 .and().exceptionHandling().accessDeniedPage("/Access_Denied");
     }
 

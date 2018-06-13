@@ -3,10 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <t:layout title="Anasayfa">
-    <div class="alert alert-danger">
-            ${errMsg}
-    </div>
-
+    Error
 </t:layout>
 
 

@@ -3,6 +3,8 @@ package edu.akdeniz.softeng.surveyrest.service;
 import com.maemresen.jutils.collections.NotNullList;
 import edu.akdeniz.softeng.surveyrest.entity.Result;
 import edu.akdeniz.softeng.surveyrest.repository.ResultRepo;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Service;
@@ -20,6 +22,8 @@ import java.util.List;
 @Controller
 @RequestMapping("/service")
 public class ResultService {
+
+    private final Logger log = LoggerFactory.getLogger(this.getClass());
 
     private final ResultRepo resultRepo;
 

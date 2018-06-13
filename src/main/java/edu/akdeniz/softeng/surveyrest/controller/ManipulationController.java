@@ -7,6 +7,8 @@ import edu.akdeniz.softeng.surveyrest.service.SurveyService;
 import edu.akdeniz.softeng.surveyrest.service.manipulation.ResultManipulationService;
 import edu.akdeniz.softeng.surveyrest.service.manipulation.SurveyManipulationService;
 import edu.akdeniz.softeng.surveyrest.util.helper.SurveyHelper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,6 +23,8 @@ import java.util.List;
  */
 @Controller
 public class ManipulationController {
+
+    private final Logger log = LoggerFactory.getLogger(this.getClass());
 
     private final SurveyHelper surveyHelper;
     private final SurveyService surveyService;
@@ -41,25 +45,31 @@ public class ManipulationController {
     public String create(@ModelAttribute("survey") Survey survey, RedirectAttributes redirectAttributes) {
         redirectAttributes.addFlashAttribute("msg", "Your survey successfully created");
         redirectAttributes.addFlashAttribute("status", "success");
-        return "redirect:/secure/survey/" + surveyManipulationService.create(survey) + "/edit";
+        String surveyId = surveyManipulationService.create(survey);
+        log.info(String.format("Survey created successfully with id=[%s]",surveyId));
+        return "redirect:/secure/survey/" + surveyId + "/edit";
     }
 
     @PostMapping("/secure/survey/save")
     public String save(@ModelAttribute("survey") Survey survey, RedirectAttributes redirectAttributes) {
         redirectAttributes.addFlashAttribute("msg", "Your changes successfully changed");
         redirectAttributes.addFlashAttribute("status", "info");
-        return "redirect:/secure/survey/" + surveyManipulationService.save(survey) + "/edit";
+        String surveyId = surveyManipulationService.save(survey);
+        log.info(String.format("Survey saved successfully with id=[%s]",surveyId));
+        return "redirect:/secure/survey/" + surveyId + "/edit";
     }
 
     @ResponseBody
     @GetMapping("/survey/clear")
     public List<Survey> clearDB() {
+        log.info("Survey Database cleared.");
         return surveyHelper.clearDB();
     }
 
     @ResponseBody
     @GetMapping("/survey/reset")
     public List<Survey> resetDB() {
+        log.info("Survey Database was reset.");
         return surveyHelper.resetDB();
     }
 
@@ -69,6 +79,7 @@ public class ManipulationController {
         SurveyModel surveyModel = surveyService.getSurveyModelBySurveyResult(uid, surveyId);
         if (surveyModel == null) {
             model.addAttribute("errMsg", "No Result Found");
+            log.info("No Result found");
             return "error";
         }
         model.addAttribute("surveyModel", surveyModel);

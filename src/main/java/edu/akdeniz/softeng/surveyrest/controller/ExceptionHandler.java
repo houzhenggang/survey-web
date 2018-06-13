@@ -1,11 +1,14 @@
 package edu.akdeniz.softeng.surveyrest.controller;
 
 import edu.akdeniz.softeng.surveyrest.constant.Constants;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.web.servlet.error.ErrorController;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -20,6 +23,8 @@ import javax.servlet.http.HttpSession;
 @Controller
 public class ExceptionHandler implements ErrorController {
 
+    private final Logger log = LoggerFactory.getLogger(this.getClass());
+
     @RequestMapping(value = Constants.ERROR_URI)
     private String error(HttpServletRequest request, HttpServletResponse response, HttpSession session, Model model) {
         // Appropriate HTTP response code (e.g. 404 or 500) is automatically set by
@@ -27,13 +32,18 @@ public class ExceptionHandler implements ErrorController {
         // Here we just define response body.
 
         /**/
-        switch (response.getStatus()) {
 
-            // not found
-            case 404:
-                return "404";
+        String originalUri = (String) request.getAttribute(RequestDispatcher.ERROR_REQUEST_URI);
+        int status = response.getStatus();
+        String msg = String.format("Error with Response=[%d], Request URI=[%s] and Session id=[%s]", status, originalUri, session.getId());
+        log.error(msg);
+        model.addAttribute("response", status);
+        if (status == 404) {
+            model.addAttribute("errMsg", originalUri + " not found");
+        } else {
+            model.addAttribute("errMsg", "An error occurred");
         }
-        return "error";
+        return "404";
     }
 
     @Override
