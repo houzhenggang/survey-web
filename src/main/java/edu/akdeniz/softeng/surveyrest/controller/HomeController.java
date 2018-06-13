@@ -49,7 +49,7 @@ public class HomeController {
         }
         Survey survey = surveyService.getSurvey(surveyId);
         if (survey == null) {
-            log.warn(String.format("Survey not found with id=[%d]", surveyId));
+            log.warn(String.format("Survey not found with id=[%s]", surveyId));
             return "redirect:/surveys";
         }
         model.addAttribute("survey", survey);
@@ -72,7 +72,6 @@ public class HomeController {
 
     @GetMapping("/secure/survey/create")
     public String create() {
-        log.info("New survey created.");
         return "create";
     }
 

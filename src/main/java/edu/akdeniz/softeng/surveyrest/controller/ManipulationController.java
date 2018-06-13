@@ -6,6 +6,7 @@ import edu.akdeniz.softeng.surveyrest.model.SurveyModel;
 import edu.akdeniz.softeng.surveyrest.service.SurveyService;
 import edu.akdeniz.softeng.surveyrest.service.manipulation.ResultManipulationService;
 import edu.akdeniz.softeng.surveyrest.service.manipulation.SurveyManipulationService;
+import edu.akdeniz.softeng.surveyrest.util.helper.SecurityHelper;
 import edu.akdeniz.softeng.surveyrest.util.helper.SurveyHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -46,7 +47,7 @@ public class ManipulationController {
         redirectAttributes.addFlashAttribute("msg", "Your survey successfully created");
         redirectAttributes.addFlashAttribute("status", "success");
         String surveyId = surveyManipulationService.create(survey);
-        log.info(String.format("Survey created successfully with id=[%s]",surveyId));
+        log.info(String.format("Survey created successfully with id=[%s] from Username=[%s]",surveyId,SecurityHelper.getUserName()));
         return "redirect:/secure/survey/" + surveyId + "/edit";
     }
 
@@ -55,7 +56,7 @@ public class ManipulationController {
         redirectAttributes.addFlashAttribute("msg", "Your changes successfully changed");
         redirectAttributes.addFlashAttribute("status", "info");
         String surveyId = surveyManipulationService.save(survey);
-        log.info(String.format("Survey saved successfully with id=[%s]",surveyId));
+        log.info(String.format("Survey saved successfully with id=[%s] from Username=[%s]",surveyId,SecurityHelper.getUserName()));
         return "redirect:/secure/survey/" + surveyId + "/edit";
     }
 

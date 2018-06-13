@@ -23,8 +23,6 @@ import java.util.List;
 @RequestMapping("/service")
 public class ResultService {
 
-    private final Logger log = LoggerFactory.getLogger(this.getClass());
-
     private final ResultRepo resultRepo;
 
     @Autowired
