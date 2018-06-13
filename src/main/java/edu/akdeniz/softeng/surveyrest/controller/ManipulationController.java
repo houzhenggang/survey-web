@@ -25,8 +25,6 @@ import java.util.List;
 @Controller
 public class ManipulationController {
 
-    private final Logger log = LoggerFactory.getLogger(this.getClass());
-
     private final SurveyHelper surveyHelper;
     private final SurveyService surveyService;
     private final SurveyManipulationService surveyManipulationService;
@@ -47,7 +45,6 @@ public class ManipulationController {
         redirectAttributes.addFlashAttribute("msg", "Your survey successfully created");
         redirectAttributes.addFlashAttribute("status", "success");
         String surveyId = surveyManipulationService.create(survey);
-        log.info(String.format("Survey created successfully with id=[%s] from Username=[%s]",surveyId,SecurityHelper.getUserName()));
         return "redirect:/secure/survey/" + surveyId + "/edit";
     }
 
@@ -56,21 +53,18 @@ public class ManipulationController {
         redirectAttributes.addFlashAttribute("msg", "Your changes successfully changed");
         redirectAttributes.addFlashAttribute("status", "info");
         String surveyId = surveyManipulationService.save(survey);
-        log.info(String.format("Survey saved successfully with id=[%s] from Username=[%s]",surveyId,SecurityHelper.getUserName()));
         return "redirect:/secure/survey/" + surveyId + "/edit";
     }
 
     @ResponseBody
-    @GetMapping("/survey/clear")
+    @GetMapping("/secure/survey/clear")
     public List<Survey> clearDB() {
-        log.info("Survey Database cleared.");
         return surveyHelper.clearDB();
     }
 
     @ResponseBody
-    @GetMapping("/survey/reset")
+    @GetMapping("/secure/survey/reset")
     public List<Survey> resetDB() {
-        log.info("Survey Database was reset.");
         return surveyHelper.resetDB();
     }
 
@@ -80,7 +74,6 @@ public class ManipulationController {
         SurveyModel surveyModel = surveyService.getSurveyModelBySurveyResult(uid, surveyId);
         if (surveyModel == null) {
             model.addAttribute("errMsg", "No Result Found");
-            log.info("No Result found");
             return "error";
         }
         model.addAttribute("surveyModel", surveyModel);

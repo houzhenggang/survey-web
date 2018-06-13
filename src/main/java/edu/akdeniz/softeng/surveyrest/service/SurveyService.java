@@ -11,6 +11,9 @@ import edu.akdeniz.softeng.surveyrest.model.Answer;
 import edu.akdeniz.softeng.surveyrest.model.QuestionModel;
 import edu.akdeniz.softeng.surveyrest.model.SurveyModel;
 import edu.akdeniz.softeng.surveyrest.repository.SurveyRepo;
+import edu.akdeniz.softeng.surveyrest.util.helper.SecurityHelper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.aggregation.BooleanOperators;
 import org.springframework.stereotype.Controller;
@@ -34,6 +37,7 @@ public class SurveyService {
     private final SurveyRepo surveyRepo;
     private final ResultService resultService;
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(SurveyService.class.getName());
 
     @Autowired
     public SurveyService(SurveyRepo surveyRepo, ResultService resultService) {
@@ -49,7 +53,14 @@ public class SurveyService {
     @ResponseBody
     @GetMapping("/surveyList")
     public List<Survey> getSurveyList() {
-        return new NotNullList<>(surveyRepo.findAll());
+        List<Survey> result = new NotNullList<>(surveyRepo.findAll());
+        LOGGER.debug("Surveys : " + result);
+        if (result.isEmpty()) {
+            LOGGER.warn("No Survey Found");
+        } else {
+            LOGGER.info(String.format("Surveys listed from [%s]", SecurityHelper.getUserName()));
+        }
+        return result;
     }
 
 
@@ -65,13 +76,12 @@ public class SurveyService {
     public SurveyModel getSurveyModelBySurveyResult(String uid, String surveyId) {
         Survey survey = getSurvey(surveyId);
         if (survey == null) {
+            LOGGER.error(String.format("No Result found for Survey=[%s]", surveyId));
             return null;
         }
         List<QuestionModel> questionModelList = getQuestionModelList(uid, surveyId, survey.getQuestions());
         SurveyModel surveyModel = new SurveyModel(survey, questionModelList);
-        ConsoleHelper.printAction(() -> {
-            System.out.println(surveyModel);
-        }, "printing survey model");
+        LOGGER.info(String.format("Answers listed of Survey with id=[%s] to %s", surveyId, SecurityHelper.getUserName()));
         return surveyModel;
     }
 

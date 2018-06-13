@@ -4,6 +4,9 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
+import edu.akdeniz.softeng.surveyrest.controller.ManipulationController;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -20,91 +23,95 @@ import edu.akdeniz.softeng.surveyrest.service.manipulation.SurveyManipulationSer
 
 /**
  * @author maemresen
- *         <p>
- *         Component consist of helper funtions reset all data, clear all data
- *         etc.
+ * <p>
+ * Component consist of helper funtions reset all data, clear all data
+ * etc.
  */
 @Component
 public class SurveyHelper {
 
-	private final SurveyService surveyService;
-	private final SurveyManipulationService surveyManipulationService;
+    private static final Logger LOGGER = LoggerFactory.getLogger(SurveyHelper.class.getName());
 
-	private final ResultService resultService;
-	private final ResultManipulationService resultManipulationService;
+    private final SurveyService surveyService;
+    private final SurveyManipulationService surveyManipulationService;
 
-	@Autowired
-	public SurveyHelper(SurveyService surveyService, SurveyManipulationService surveyManipulationService,
-			ResultService resultService, ResultManipulationService resultManipulationService) {
-		this.surveyService = surveyService;
-		this.surveyManipulationService = surveyManipulationService;
-		this.resultService = resultService;
-		this.resultManipulationService = resultManipulationService;
-	}
+    private final ResultService resultService;
+    private final ResultManipulationService resultManipulationService;
 
-	public Survey getDummySurvey() {
-		Survey temp = new Survey();
-		temp.setTitle("DummySurvey1");
-		temp.setDescription("DummyDescription1");
-		return temp;
-	}
+    @Autowired
+    public SurveyHelper(SurveyService surveyService, SurveyManipulationService surveyManipulationService,
+                        ResultService resultService, ResultManipulationService resultManipulationService) {
+        this.surveyService = surveyService;
+        this.surveyManipulationService = surveyManipulationService;
+        this.resultService = resultService;
+        this.resultManipulationService = resultManipulationService;
+    }
 
-	public List<Survey> clearDB() {
-		surveyManipulationService.deleteAll();
-		resultManipulationService.deleteAll();
-		return surveyService.getSurveyList();
-	}
+    public Survey getDummySurvey() {
+        Survey temp = new Survey();
+        temp.setTitle("DummySurvey1");
+        temp.setDescription("DummyDescription1");
+        return temp;
+    }
 
-	public List<Survey> resetDB() {
+    public List<Survey> clearDB() {
+        surveyManipulationService.deleteAll();
+        resultManipulationService.deleteAll();
+        LOGGER.info("Survey Database cleared.");
+        return surveyService.getSurveyList();
+    }
 
-		clearDB();
+    public List<Survey> resetDB() {
 
-		// setting answers ...
-		Choice a1 = new Choice();
-		a1.setContent("Choice 1");
+        clearDB();
 
-		Choice a2 = new Choice();
-		a2.setContent("Choice 2");
+        // setting answers ...
+        Choice a1 = new Choice();
+        a1.setContent("Choice 1");
 
-		Choice a3 = new Choice();
-		a3.setContent("Choice 3");
+        Choice a2 = new Choice();
+        a2.setContent("Choice 2");
 
-		Choice a4 = new Choice();
-		a4.setContent("Choice 4");
+        Choice a3 = new Choice();
+        a3.setContent("Choice 3");
 
-		// setting question 1...
-		Question q1 = new Question();
-		q1.setType(Constants.QuestionType.SINGLE_CHOICE);
-		q1.setTitle("Would you like to add something?");
-		q1.setHint("it could be better, if...");
-		q1.setChoices(Arrays.asList(a1, a2));
+        Choice a4 = new Choice();
+        a4.setContent("Choice 4");
 
-		// setting question 2...
-		Question q2 = new Question();
-		q2.setType(Constants.QuestionType.SINGLE_CHOICE);
-		q2.setTitle("Other Questions");
-		q2.setHint("it could be better, if...");
-		q2.setChoices(Arrays.asList(a3, a4));
+        // setting question 1...
+        Question q1 = new Question();
+        q1.setType(Constants.QuestionType.SINGLE_CHOICE);
+        q1.setTitle("Would you like to add something?");
+        q1.setHint("it could be better, if...");
+        q1.setChoices(Arrays.asList(a1, a2));
 
-		// setting question 3...
+        // setting question 2...
+        Question q2 = new Question();
+        q2.setType(Constants.QuestionType.SINGLE_CHOICE);
+        q2.setTitle("Other Questions");
+        q2.setHint("it could be better, if...");
+        q2.setChoices(Arrays.asList(a3, a4));
 
-		// setting survey 1...
-		Survey survey = new Survey();
-		survey.setTitle("Survey Title");
-		survey.setDescription("Survey Description");
-		survey.setQuestions(Arrays.asList(q1, q2));
-		surveyManipulationService.save(survey);
+        // setting question 3...
 
-		// setting survey 2...
-		survey = new Survey();
-		survey.setTitle("Survey Title 2");
-		survey.setDescription("Survey Description 2");
-		survey.setQuestions(Collections.singletonList(q2));
-		surveyManipulationService.save(survey);
+        // setting survey 1...
+        Survey survey = new Survey();
+        survey.setTitle("Survey Title");
+        survey.setDescription("Survey Description");
+        survey.setQuestions(Arrays.asList(q1, q2));
+        surveyManipulationService.save(survey);
 
-		// printing out...
-		ConsoleHelper.startSection("Survey List");
-		System.out.println(JsonHelper.objectToJson(surveyService.getSurveyList()));
-		return surveyService.getSurveyList();
-	}
+        // setting survey 2...
+        survey = new Survey();
+        survey.setTitle("Survey Title 2");
+        survey.setDescription("Survey Description 2");
+        survey.setQuestions(Collections.singletonList(q2));
+        surveyManipulationService.save(survey);
+
+        LOGGER.info("Survey Database was reset.");
+        // printing out...
+        //ConsoleHelper.startSection("Survey List");
+        //System.out.println(JsonHelper.objectToJson(surveyService.getSurveyList()));
+        return surveyService.getSurveyList();
+    }
 }

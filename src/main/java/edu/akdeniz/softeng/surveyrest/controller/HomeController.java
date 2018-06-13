@@ -21,7 +21,8 @@ import org.slf4j.LoggerFactory;
 @Controller
 public class HomeController {
 
-    private final Logger log = LoggerFactory.getLogger(this.getClass());
+    private static final Logger LOGGER = LoggerFactory.getLogger(HomeController.class.getName());
+
     private final SurveyService surveyService;
 
     @Autowired
@@ -37,22 +38,22 @@ public class HomeController {
     @GetMapping("/surveys")
     public String surveys(Model model) {
         model.addAttribute("surveyList", surveyService.getSurveyList());
-        log.info(String.format("Surveys listed from [%s]",SecurityHelper.getUserName()));
         return "surveys";
     }
 
     @GetMapping(value = {"/survey/{surveyId}/take", "/survey/take"})
     public String apply(Model model, @PathVariable(required = false) String surveyId) {
         if (surveyId == null) {
-            log.warn("SurveyId is empty");
+            LOGGER.error("SurveyId is empty");
             return "redirect:/surveys";
         }
         Survey survey = surveyService.getSurvey(surveyId);
         if (survey == null) {
-            log.warn(String.format("Survey not found with id=[%s]", surveyId));
+            LOGGER.error(String.format("Survey not found with id=[%s]", surveyId));
             return "redirect:/surveys";
         }
         model.addAttribute("survey", survey);
+        LOGGER.info(String.format("Survey is taking by [%s]", SecurityHelper.getUserName()));
         return "take";
     }
 
@@ -63,7 +64,7 @@ public class HomeController {
     @GetMapping(value = {"/secure/survey/{surveyId}/edit", "/secure/survey/edit"})
     public String edit(Model model, @PathVariable(required = false) String surveyId) {
         if (surveyId == null) {
-            log.warn(String.format("Survey not found with id=[%d]", surveyId));
+            LOGGER.warn(String.format("Survey not found with id=[%d]", surveyId));
             return "redirect:/surveys";
         }
         model.addAttribute("survey", surveyService.getSurvey(surveyId));
