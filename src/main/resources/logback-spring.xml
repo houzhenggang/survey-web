@@ -4,7 +4,7 @@
     <springProfile name="prod">
 
         <appender name="SYSLOG" class="ch.qos.logback.classic.net.SyslogAppender">
-            <syslogHost>10.5.0.133</syslogHost>
+            <syslogHost>10.5.0.130</syslogHost>
             <facility>LOCAL0</facility>
             <port>514</port>
             <!-- include %exception in message instead of allowing default multiline stack trace -->
