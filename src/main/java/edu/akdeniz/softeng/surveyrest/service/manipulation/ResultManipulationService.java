@@ -34,7 +34,7 @@ public class ResultManipulationService {
 
     public void deleteAll() {
         resultRepo.deleteAll();
-        LOGGER.info(String.format("All results deleted by %s", SecurityHelper.getUserName()));
+        LOGGER.info(String.format("All results deleted by [%s]", SecurityHelper.getUserName()));
     }
 
 
@@ -51,7 +51,7 @@ public class ResultManipulationService {
     public String save(SurveyResult surveyResult) {
         String uid = UUID.randomUUID().toString();
         save(surveyResult.getResults(), uid);
-        LOGGER.info(String.format("All Results save with uid=[%s] by %s", uid, SecurityHelper.getUserName()));
+        LOGGER.info(String.format("All Results save with uid=[%s] by [%s]", uid, SecurityHelper.getUserName()));
         return uid;
     }
 

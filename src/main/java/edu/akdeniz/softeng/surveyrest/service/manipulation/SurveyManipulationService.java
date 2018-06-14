@@ -44,7 +44,7 @@ public class SurveyManipulationService {
      */
     public String create(Survey survey) {
         String surveyId = save(survey, false);
-        LOGGER.info(String.format("Survey with id=[%s] created by %s", surveyId, SecurityHelper.getUserName()));
+        LOGGER.info(String.format("Survey[%s] created by [%s]", surveyId, SecurityHelper.getUserName()));
         return surveyId;
     }
 
@@ -62,7 +62,7 @@ public class SurveyManipulationService {
         surveyRepo.save(survey);
         String surveyId = survey.getSurveyId();
         if (print) {
-            LOGGER.info(String.format("Survey with id=[%s] saved by %s", surveyId, SecurityHelper.getUserName()));
+            LOGGER.info(String.format("Survey[%s] saved by [%s]", surveyId, SecurityHelper.getUserName()));
         }
         return surveyId;
     }
@@ -74,7 +74,7 @@ public class SurveyManipulationService {
      */
     public void delete(Survey survey) {
         surveyRepo.delete(survey);
-        LOGGER.info(String.format("Survey with id=[%s] deleted by %s", survey.getSurveyId(), SecurityHelper.getUserName()));
+        LOGGER.info(String.format("Survey[%s] deleted by [%s]", survey.getSurveyId(), SecurityHelper.getUserName()));
     }
 
     /**
@@ -82,6 +82,6 @@ public class SurveyManipulationService {
      */
     public void deleteAll() {
         surveyRepo.deleteAll();
-        LOGGER.info(String.format("All surveys deleted by %s", SecurityHelper.getUserName()));
+        LOGGER.info(String.format("All surveys deleted by [%s]", SecurityHelper.getUserName()));
     }
 }

@@ -28,7 +28,7 @@ public class LoginController {
     @RequestMapping(value = "/Access_Denied", method = RequestMethod.GET)
     public String accessDeniedPage(ModelMap model) {
         model.addAttribute("user", SecurityHelper.getUserName());
-        LOGGER.info(String.format("Access Denied with Username=[%s]",SecurityHelper.getUserName()));
+        LOGGER.info(String.format("Access Denied for [%s]",SecurityHelper.getUserName()));
         return "accessDenied";
     }
 
@@ -41,7 +41,7 @@ public class LoginController {
     public String logoutPage(HttpServletRequest request, HttpServletResponse response) {
         Authentication auth = SecurityHelper.getAuthentication();
         if (auth != null) {
-            LOGGER.info(String.format("Logout User with Username=[%s]",SecurityHelper.getUserName()));
+            LOGGER.info(String.format("[%s] Logout",SecurityHelper.getUserName()));
             new SecurityContextLogoutHandler().logout(request, response, auth);
         }
         return "redirect:/login?logout";//You can redirect wherever you want, but generally it's a good idea to show login screen again.

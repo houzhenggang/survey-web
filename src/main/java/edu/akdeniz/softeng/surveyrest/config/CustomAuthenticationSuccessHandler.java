@@ -19,8 +19,8 @@ public class CustomAuthenticationSuccessHandler implements
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request,
                                         HttpServletResponse response, Authentication authentication) throws IOException {
-        log.info(String.format("Login User with Username=[%s]", SecurityHelper.getUserName()));
-        response.sendRedirect("/surveys");
+        log.info(String.format("[%s] Login", SecurityHelper.getUserName()));
+        response.sendRedirect("/");
     }
 
 

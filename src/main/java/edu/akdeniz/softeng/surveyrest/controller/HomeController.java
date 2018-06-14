@@ -49,11 +49,11 @@ public class HomeController {
         }
         Survey survey = surveyService.getSurvey(surveyId);
         if (survey == null) {
-            LOGGER.error(String.format("Survey not found with id=[%s]", surveyId));
+            LOGGER.error(String.format("Survey[%s] not found", surveyId));
             return "redirect:/surveys";
         }
         model.addAttribute("survey", survey);
-        LOGGER.info(String.format("Survey is taking by [%s]", SecurityHelper.getUserName()));
+        LOGGER.info(String.format("Survey[%s] is taking by [%s]", surveyId, SecurityHelper.getUserName()));
         return "take";
     }
 
@@ -64,7 +64,7 @@ public class HomeController {
     @GetMapping(value = {"/secure/survey/{surveyId}/edit", "/secure/survey/edit"})
     public String edit(Model model, @PathVariable(required = false) String surveyId) {
         if (surveyId == null) {
-            LOGGER.warn(String.format("Survey not found with id=[%d]", surveyId));
+            LOGGER.warn(String.format("Survey not found"));
             return "redirect:/surveys";
         }
         model.addAttribute("survey", surveyService.getSurvey(surveyId));

@@ -58,7 +58,7 @@ public class SurveyService {
         if (result.isEmpty()) {
             LOGGER.warn("No Survey Found");
         } else {
-            LOGGER.info(String.format("Surveys listed from [%s]", SecurityHelper.getUserName()));
+            LOGGER.info(String.format("Surveys listed by [%s]", SecurityHelper.getUserName()));
         }
         return result;
     }
@@ -76,12 +76,12 @@ public class SurveyService {
     public SurveyModel getSurveyModelBySurveyResult(String uid, String surveyId) {
         Survey survey = getSurvey(surveyId);
         if (survey == null) {
-            LOGGER.error(String.format("No Result found for Survey=[%s]", surveyId));
+            LOGGER.error(String.format("No Result found for Survey[%s]", surveyId));
             return null;
         }
         List<QuestionModel> questionModelList = getQuestionModelList(uid, surveyId, survey.getQuestions());
         SurveyModel surveyModel = new SurveyModel(survey, questionModelList);
-        LOGGER.info(String.format("Answers listed of Survey with id=[%s] to %s", surveyId, SecurityHelper.getUserName()));
+        LOGGER.info(String.format("Answers listed of Survey[%s] to [%s]", surveyId, SecurityHelper.getUserName()));
         return surveyModel;
     }
 
