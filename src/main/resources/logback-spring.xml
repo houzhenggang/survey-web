@@ -9,13 +9,11 @@
             <port>514</port>
             <!-- include %exception in message instead of allowing default multiline stack trace -->
             <throwableExcluded>true</throwableExcluded>
-
         </appender>
 
         <logger name="edu.akdeniz.softeng" level="INFO" additivity="false">
             <appender-ref ref="CONSOLE"/>
             <appender-ref ref="SYSLOG"/>
-
         </logger>
 
     </springProfile>
