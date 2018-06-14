@@ -38,7 +38,8 @@ public class WebSecurityAlphaConf extends WebSecurityConfigurerAdapter {
                 .antMatchers("/", "/home", "/survey/**").permitAll()
                 .antMatchers("/secure/**").access("hasAnyAuthority('Survey')")
                 .and().formLogin().loginPage("/login")
-                .usernameParameter("ssoId").passwordParameter("password").successHandler(new CustomAuthenticationSuccessHandler())
+                .usernameParameter("ssoId").passwordParameter("password")
+                .successHandler(new CustomAuthenticationSuccessHandler())
                 .and().exceptionHandling().accessDeniedPage("/Access_Denied");
     }
 
