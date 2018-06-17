@@ -31,11 +31,13 @@ public class WebSecurityProdConf extends WebSecurityConfigurerAdapter {
     @Value("${ad.domain}")
     private String AD_DOMAIN;
     @Value("${ad.url}")
-    private String AD_URL = "ldap://10.44.0.5:389";
+    private String AD_URL;
 
     @Override
     protected void configure(AuthenticationManagerBuilder authManagerBuilder) throws Exception {
-        authManagerBuilder.authenticationProvider(activeDirectoryLdapAuthenticationProvider()).userDetailsService(userDetailsService());
+    	AuthenticationProvider   manager = activeDirectoryLdapAuthenticationProvider();
+    	
+        authManagerBuilder.authenticationProvider(manager).userDetailsService(userDetailsService());
     }
 
     @Bean
@@ -70,5 +72,4 @@ public class WebSecurityProdConf extends WebSecurityConfigurerAdapter {
                 .successHandler(new CustomAuthenticationSuccessHandler())
                 .and().exceptionHandling().accessDeniedPage("/Access_Denied");
     }
-    // user1, emre, canberk  = akdeniz2018
 }
