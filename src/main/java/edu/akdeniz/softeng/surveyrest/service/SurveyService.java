@@ -81,7 +81,7 @@ public class SurveyService {
         }
         List<QuestionModel> questionModelList = getQuestionModelList(uid, surveyId, survey.getQuestions());
         SurveyModel surveyModel = new SurveyModel(survey, questionModelList);
-        LOGGER.info(String.format("Answers listed of Survey[%s] to [%s]", surveyId, SecurityHelper.getUserName()));
+        LOGGER.info(String.format("Answers listed of Survey[%s] with uid=[%s] to [%s]", surveyId, uid,SecurityHelper.getUserName()));
         return surveyModel;
     }
 

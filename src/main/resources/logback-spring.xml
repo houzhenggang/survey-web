@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
     <include resource="org/springframework/boot/logging/logback/base.xml"/>
-    <springProfile name="prod">
+    <springProfile name="alpha">
 
         <appender name="SYSLOG" class="ch.qos.logback.classic.net.SyslogAppender">
-            <syslogHost>10.5.0.130</syslogHost>
+            <syslogHost>188.166.72.117</syslogHost>
             <facility>LOCAL0</facility>
-            <port>514</port>
+            <port>5700</port>
             <!-- include %exception in message instead of allowing default multiline stack trace -->
             <throwableExcluded>true</throwableExcluded>
         </appender>
@@ -15,6 +15,21 @@
             <appender-ref ref="CONSOLE"/>
             <appender-ref ref="SYSLOG"/>
         </logger>
+    </springProfile>
 
+    <springProfile name="prod">
+
+        <appender name="SYSLOG" class="ch.qos.logback.classic.net.SyslogAppender">
+            <syslogHost>188.166.72.117</syslogHost>
+            <facility>LOCAL0</facility>
+            <port>5700</port>
+            <!-- include %exception in message instead of allowing default multiline stack trace -->
+            <throwableExcluded>true</throwableExcluded>
+        </appender>
+
+        <logger name="edu.akdeniz.softeng" level="INFO" additivity="false">
+            <appender-ref ref="CONSOLE"/>
+            <appender-ref ref="SYSLOG"/>
+        </logger>
     </springProfile>
 </configuration>
