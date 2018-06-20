@@ -27,9 +27,31 @@
             <throwableExcluded>true</throwableExcluded>
         </appender>
 
+
+        <appender name="ROLLING" class="ch.qos.logback.core.rolling.RollingFileAppender">
+            <file>surveyapp.log</file>
+            <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+                <Pattern>
+                    %d{yyyy-MM-dd HH:mm:ss} - %msg%n
+                </Pattern>
+            </encoder>
+
+            <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+                <!-- rollover daily -->
+                <fileNamePattern>
+                    surveyapp.%d{yyyy-MM-dd}.%i.log
+                </fileNamePattern>
+                <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                    <maxFileSize>10MB</maxFileSize>
+                </timeBasedFileNamingAndTriggeringPolicy>
+            </rollingPolicy>
+
+        </appender>
+
         <logger name="edu.akdeniz.softeng" level="INFO" additivity="false">
             <appender-ref ref="CONSOLE"/>
             <appender-ref ref="SYSLOG"/>
+            <appender-ref ref="ROLLING"/>
         </logger>
     </springProfile>
 </configuration>
