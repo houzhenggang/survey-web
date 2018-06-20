@@ -4,7 +4,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection = "counts")
-public class Count {
+public class Counts {
 
 
     private String questionId;
@@ -12,7 +12,7 @@ public class Count {
     private int count;
 
 
-    public Count(){
+    public Counts(){
 
     }
 

@@ -2,7 +2,7 @@ package edu.akdeniz.softeng.surveyrest.service;
 
 import com.maemresen.jutils.collections.NotNullList;
 import edu.akdeniz.softeng.surveyrest.constant.Constants.QuestionType;
-import edu.akdeniz.softeng.surveyrest.entity.Count;
+import edu.akdeniz.softeng.surveyrest.entity.Counts;
 import edu.akdeniz.softeng.surveyrest.entity.survey.Choice;
 import edu.akdeniz.softeng.surveyrest.entity.survey.Question;
 import edu.akdeniz.softeng.surveyrest.entity.survey.Survey;
@@ -44,14 +44,14 @@ public class CountService {
 
 
     public int getCountByQuestionIdAndChoiceId(String questionId, String choiceId) {
-        List<Count> result = counterRepo.findByQuestionIdAndChoiceId(questionId, choiceId);
+        List<Counts> result = counterRepo.findByQuestionIdAndChoiceId(questionId, choiceId);
         LOGGER.info(result+" is result");
-        List<Count> counts = new NotNullList<>(result);
+        List<Counts> counts = new NotNullList<>(result);
         if (counts.isEmpty()) {
             LOGGER.warn(String.format("No Result Found for questionId=[%s] and choiceId=[%s]", questionId, choiceId));
             return 0;
         }
-        Count count = counts.get(0);
+        Counts count = counts.get(0);
         if (count == null) {
             LOGGER.error("Count is null");
             return 0;
