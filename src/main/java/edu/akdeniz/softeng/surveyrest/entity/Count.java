@@ -1,25 +1,35 @@
 package edu.akdeniz.softeng.surveyrest.entity;
 
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
+@Document(collection = "counts")
 public class Count {
 
-    private int questionId;
-    private int choiceId;
+
+    private String questionId;
+    private String choiceId;
     private int count;
 
 
-    public int getQuestionId() {
+    public Count(){
+
+    }
+
+
+    public String getQuestionId() {
         return questionId;
     }
 
-    public void setQuestionId(int questionId) {
+    public void setQuestionId(String questionId) {
         this.questionId = questionId;
     }
 
-    public int getChoiceId() {
+    public String getChoiceId() {
         return choiceId;
     }
 
-    public void setChoiceId(int choiceId) {
+    public void setChoiceId(String choiceId) {
         this.choiceId = choiceId;
     }
 

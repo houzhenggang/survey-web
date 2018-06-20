@@ -1,9 +1,7 @@
 package edu.akdeniz.softeng.surveyrest.service;
 
 import com.maemresen.jutils.collections.NotNullList;
-import com.maemresen.jutils.helper.ConsoleHelper;
 import edu.akdeniz.softeng.surveyrest.constant.Constants.QuestionType;
-import edu.akdeniz.softeng.surveyrest.entity.SurveyResult;
 import edu.akdeniz.softeng.surveyrest.entity.survey.Choice;
 import edu.akdeniz.softeng.surveyrest.entity.survey.Question;
 import edu.akdeniz.softeng.surveyrest.entity.survey.Survey;
@@ -15,9 +13,7 @@ import edu.akdeniz.softeng.surveyrest.util.helper.SecurityHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.mongodb.core.aggregation.BooleanOperators;
 import org.springframework.stereotype.Controller;
-import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -31,18 +27,20 @@ import java.util.List;
  * Service for surveys.
  */
 @Controller
-@RequestMapping("/service/")
+@RequestMapping("/service")
 public class SurveyService {
 
     private final SurveyRepo surveyRepo;
     private final ResultService resultService;
+    private final CountService countService;
 
     private static final Logger LOGGER = LoggerFactory.getLogger(SurveyService.class.getName());
 
     @Autowired
-    public SurveyService(SurveyRepo surveyRepo, ResultService resultService) {
+    public SurveyService(SurveyRepo surveyRepo, ResultService resultService, CountService countService) {
         this.surveyRepo = surveyRepo;
         this.resultService = resultService;
+        this.countService = countService;
     }
 
     // ....
@@ -81,7 +79,7 @@ public class SurveyService {
         }
         List<QuestionModel> questionModelList = getQuestionModelList(uid, surveyId, survey.getQuestions());
         SurveyModel surveyModel = new SurveyModel(survey, questionModelList);
-        LOGGER.info(String.format("Answers listed of Survey[%s] with uid=[%s] to [%s]", surveyId, uid,SecurityHelper.getUserName()));
+        LOGGER.info(String.format("Answers listed of Survey[%s] with uid=[%s] to [%s]", surveyId, uid, SecurityHelper.getUserName()));
         return surveyModel;
     }
 
@@ -110,7 +108,9 @@ public class SurveyService {
     private List<Answer> getAnswerModelList(String uid, String surveyId, String questionId, List<Choice> choiceList) {
         List<Answer> answerList = new NotNullList<>();
         for (Choice choice : choiceList) {
-            answerList.add(new Answer(choice, resultService.selected(uid, surveyId, questionId, choice.getId())));
+            String choiceId = choice.getId();
+            int count = countService.getCountByQuestionIdAndChoiceId(questionId, choiceId);
+            answerList.add(new Answer(choice, resultService.selected(uid, surveyId, questionId, choiceId), count));
         }
         return answerList;
     }

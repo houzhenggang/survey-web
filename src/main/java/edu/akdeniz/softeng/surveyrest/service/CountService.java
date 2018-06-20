@@ -43,8 +43,20 @@ public class CountService {
     }
 
 
-    public Count getCountByQuestionIdAndSurveyId(@RequestParam String questionId, @RequestParam String surveyId) {
-        return counterRepo.findByQuestionIdAndChoiceId(questionId, surveyId);
+    public int getCountByQuestionIdAndChoiceId(String questionId, String choiceId) {
+        List<Count> result = counterRepo.findByQuestionIdAndChoiceId(questionId, choiceId);
+        LOGGER.info(result+" is result");
+        List<Count> counts = new NotNullList<>(result);
+        if (counts.isEmpty()) {
+            LOGGER.warn(String.format("No Result Found for questionId=[%s] and choiceId=[%s]", questionId, choiceId));
+            return 0;
+        }
+        Count count = counts.get(0);
+        if (count == null) {
+            LOGGER.error("Count is null");
+            return 0;
+        }
+        return count.getCount();
     }
 
 
