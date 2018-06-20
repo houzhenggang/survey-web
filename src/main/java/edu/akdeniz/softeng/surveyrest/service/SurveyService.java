@@ -112,7 +112,7 @@ public class SurveyService {
             String choiceId = choice.getId();
             boolean selected = resultService.selected(uid, surveyId, questionId, choiceId);
             int count = sparkService.getCountByQuestionIdAndChoiceId(questionId, choiceId);
-            double percentage = 100 * (count / answerCount);
+            double percentage = 100 * (((double) count) / ((double) answerCount));
             answerList.add(new Answer(choice, selected, count, percentage));
         }
         return answerList;
