@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-import edu.akdeniz.softeng.surveyrest.repository.CountRepo;
+import edu.akdeniz.softeng.surveyrest.service.manipulation.SparkManipulationService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,16 +35,16 @@ public class SurveyHelper {
 
     private final ResultService resultService;
     private final ResultManipulationService resultManipulationService;
-    private final CountRepo countRepo;
+    private final SparkManipulationService sparkManipulationService;
 
     @Autowired
     public SurveyHelper(SurveyService surveyService, SurveyManipulationService surveyManipulationService,
-                        ResultService resultService, ResultManipulationService resultManipulationService, CountRepo countRepo) {
+                        ResultService resultService, ResultManipulationService resultManipulationService, SparkManipulationService sparkManipulationService) {
         this.surveyService = surveyService;
         this.surveyManipulationService = surveyManipulationService;
         this.resultService = resultService;
         this.resultManipulationService = resultManipulationService;
-        this.countRepo = countRepo;
+        this.sparkManipulationService = sparkManipulationService;
     }
 
     public Survey getDummySurvey() {
@@ -57,7 +57,7 @@ public class SurveyHelper {
     public List<Survey> clearDB() {
         surveyManipulationService.deleteAll();
         resultManipulationService.deleteAll();
-        countRepo.deleteAll();
+        sparkManipulationService.deleteAll();
         LOGGER.info("Survey Database cleared.");
         return surveyService.getSurveyList();
     }

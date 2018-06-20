@@ -9,6 +9,8 @@ import java.util.List;
 /**
  * @author maemresen
  */
-public interface CountRepo extends MongoRepository<Counts, String> {
+public interface CountsRepo extends MongoRepository<Counts, String> {
+
+    public List<Counts> findByQuestionId(String questionId);
     public List<Counts> findByQuestionIdAndChoiceId(String questionId, String choiceId);
 }

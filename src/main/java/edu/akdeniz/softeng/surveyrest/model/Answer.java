@@ -7,11 +7,13 @@ public class Answer {
     private final Choice choice;
     private final boolean selected;
     private final int count;
+    private final double percentage;
 
-    public Answer(Choice choice, boolean selected, int count) {
+    public Answer(Choice choice, boolean selected, int count, double percentage) {
         this.choice = choice;
         this.selected = selected;
         this.count = count;
+        this.percentage = percentage;
     }
 
 
@@ -25,6 +27,10 @@ public class Answer {
 
     public int getCount() {
         return count;
+    }
+
+    public double getPercentage() {
+        return percentage;
     }
 
     @Override

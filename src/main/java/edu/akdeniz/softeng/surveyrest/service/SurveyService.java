@@ -32,15 +32,15 @@ public class SurveyService {
 
     private final SurveyRepo surveyRepo;
     private final ResultService resultService;
-    private final CountService countService;
+    private final SparkService sparkService;
 
     private static final Logger LOGGER = LoggerFactory.getLogger(SurveyService.class.getName());
 
     @Autowired
-    public SurveyService(SurveyRepo surveyRepo, ResultService resultService, CountService countService) {
+    public SurveyService(SurveyRepo surveyRepo, ResultService resultService, SparkService sparkService) {
         this.surveyRepo = surveyRepo;
         this.resultService = resultService;
-        this.countService = countService;
+        this.sparkService = sparkService;
     }
 
     // ....
@@ -107,13 +107,15 @@ public class SurveyService {
 
     private List<Answer> getAnswerModelList(String uid, String surveyId, String questionId, List<Choice> choiceList) {
         List<Answer> answerList = new NotNullList<>();
+        int answerCount = sparkService.getAnswerCountByQuestionId(questionId);
         for (Choice choice : choiceList) {
             String choiceId = choice.getId();
-            int count = countService.getCountByQuestionIdAndChoiceId(questionId, choiceId);
-            answerList.add(new Answer(choice, resultService.selected(uid, surveyId, questionId, choiceId), count));
+            boolean selected = resultService.selected(uid, surveyId, questionId, choiceId);
+            int count = sparkService.getCountByQuestionIdAndChoiceId(questionId, choiceId);
+            double percentage = 100 * (count / answerCount);
+            answerList.add(new Answer(choice, selected, count, percentage));
         }
         return answerList;
     }
-
 
 }
