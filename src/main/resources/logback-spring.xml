@@ -29,7 +29,7 @@
 
 
         <appender name="ROLLING" class="ch.qos.logback.core.rolling.RollingFileAppender">
-            <file>surveyapp.log</file>
+            <file>/opt/tomcat/logs/surveyapp.log</file>
             <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
                 <Pattern>
                     %d{yyyy-MM-dd HH:mm:ss} - %msg%n
@@ -39,7 +39,7 @@
             <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
                 <!-- rollover daily -->
                 <fileNamePattern>
-                    surveyapp.%d{yyyy-MM-dd}.%i.log
+                    /opt/tomcat/logs/surveyapp.%d{yyyy-MM-dd}.%i.log
                 </fileNamePattern>
                 <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
                     <maxFileSize>10MB</maxFileSize>
