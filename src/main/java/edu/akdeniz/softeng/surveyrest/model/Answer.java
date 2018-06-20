@@ -33,6 +33,12 @@ public class Answer {
         return percentage;
     }
 
+
+    public int getPercentageAsInt() {
+        return ((int) (Math.round(percentage)));
+    }
+
+
     @Override
     public String toString() {
         return "Answer{" +

@@ -28,7 +28,7 @@
         </appender>
 
 
-        <logger name="edu.akdeniz.softeng" level="INFO" additivity="false">
+        <logger name="edu.akdeniz.softeng" level="DEBUG" additivity="false">
             <appender-ref ref="CONSOLE"/>
             <appender-ref ref="SYSLOG"/>
         </logger>

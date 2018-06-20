@@ -2,6 +2,7 @@ package edu.akdeniz.softeng.surveyrest.service;
 
 import com.maemresen.jutils.collections.NotNullList;
 import edu.akdeniz.softeng.surveyrest.entity.Counts;
+import edu.akdeniz.softeng.surveyrest.entity.survey.Choice;
 import edu.akdeniz.softeng.surveyrest.repository.CountsRepo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -31,10 +32,12 @@ public class SparkService {
     }
 
 
-    public int getAnswerCountByQuestionId(String questionId) {
-        List<Counts> counts = new NotNullList<>(counterRepo.findByQuestionId(questionId));
-        LOGGER.debug(counts + " is result");
-        return counts.size();
+    public int getAnswerCountByQuestionIdAndChoiceList(String questionId, List<Choice> choiceList) {
+        int answerCount = 0;
+        for (Choice choice : choiceList) {
+            answerCount += getCountByQuestionIdAndChoiceId(questionId, choice.getId());
+        }
+        return answerCount;
     }
 
     public int getCountByQuestionIdAndChoiceId(String questionId, String choiceId) {

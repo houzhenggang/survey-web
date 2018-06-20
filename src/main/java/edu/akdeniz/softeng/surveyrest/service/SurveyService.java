@@ -107,12 +107,13 @@ public class SurveyService {
 
     private List<Answer> getAnswerModelList(String uid, String surveyId, String questionId, List<Choice> choiceList) {
         List<Answer> answerList = new NotNullList<>();
-        int answerCount = sparkService.getAnswerCountByQuestionId(questionId);
+        int answerCount = sparkService.getAnswerCountByQuestionIdAndChoiceList(questionId,choiceList);
         for (Choice choice : choiceList) {
             String choiceId = choice.getId();
             boolean selected = resultService.selected(uid, surveyId, questionId, choiceId);
             int count = sparkService.getCountByQuestionIdAndChoiceId(questionId, choiceId);
-            double percentage = 100 * (((double) count) / ((double) answerCount));
+            double percentage = ((double) (100 * count)) / ((double) answerCount);
+            LOGGER.debug(String.format("count=[%d], answerCount=[%d], percentage=[%.2f]", count, answerCount, percentage));
             answerList.add(new Answer(choice, selected, count, percentage));
         }
         return answerList;

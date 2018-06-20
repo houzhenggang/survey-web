@@ -12,7 +12,7 @@ public class Counts {
     private int count;
 
 
-    public Counts(){
+    public Counts() {
 
     }
 
@@ -39,5 +39,14 @@ public class Counts {
 
     public void setCount(int count) {
         this.count = count;
+    }
+
+    @Override
+    public String toString() {
+        return "Counts{" +
+                "questionId='" + questionId + '\'' +
+                ", choiceId='" + choiceId + '\'' +
+                ", count=" + count +
+                '}';
     }
 }

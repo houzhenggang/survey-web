@@ -36,7 +36,7 @@
                                    disabled
                                    class="custom-control-input">
                             <label class="custom-control-label" for="${answer.getChoice().getId()}">
-                                    ${answer.getChoice().getContent()} - ${answer.getPercentage()}%
+                                    ${answer.getChoice().getContent()} - ${answer.getPercentageAsInt()}%
                             </label>
                         </div>
                     </c:forEach>
