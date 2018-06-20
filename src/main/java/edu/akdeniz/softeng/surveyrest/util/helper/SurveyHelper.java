@@ -4,13 +4,11 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-import edu.akdeniz.softeng.surveyrest.controller.ManipulationController;
+import edu.akdeniz.softeng.surveyrest.repository.CountRepo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
-import com.maemresen.jutils.helper.ConsoleHelper;
 
 import edu.akdeniz.softeng.surveyrest.constant.Constants;
 import edu.akdeniz.softeng.surveyrest.entity.survey.Choice;
@@ -37,14 +35,16 @@ public class SurveyHelper {
 
     private final ResultService resultService;
     private final ResultManipulationService resultManipulationService;
+    private final CountRepo countRepo;
 
     @Autowired
     public SurveyHelper(SurveyService surveyService, SurveyManipulationService surveyManipulationService,
-                        ResultService resultService, ResultManipulationService resultManipulationService) {
+                        ResultService resultService, ResultManipulationService resultManipulationService, CountRepo countRepo) {
         this.surveyService = surveyService;
         this.surveyManipulationService = surveyManipulationService;
         this.resultService = resultService;
         this.resultManipulationService = resultManipulationService;
+        this.countRepo = countRepo;
     }
 
     public Survey getDummySurvey() {
@@ -57,6 +57,7 @@ public class SurveyHelper {
     public List<Survey> clearDB() {
         surveyManipulationService.deleteAll();
         resultManipulationService.deleteAll();
+        countRepo.deleteAll();
         LOGGER.info("Survey Database cleared.");
         return surveyService.getSurveyList();
     }

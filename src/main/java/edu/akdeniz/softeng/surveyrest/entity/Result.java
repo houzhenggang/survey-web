@@ -1,6 +1,9 @@
 package edu.akdeniz.softeng.surveyrest.entity;
 
+import com.maemresen.jutils.helper.DateTimeHelper;
 import org.springframework.data.mongodb.core.mapping.Document;
+
+import java.util.Date;
 
 /**
  * @author maemresen
@@ -42,9 +45,11 @@ public class Result {
      */
     private String comment;
 
+    private String date;
+
 
     public Result() {
-
+    date = DateTimeHelper.getTheDateInString(DateTimeHelper.DateFormat.MYSQL, DateTimeHelper.getCurrentDay());
     }
 
     public String getUid() {
@@ -93,6 +98,14 @@ public class Result {
 
     public void setComment(String comment) {
         this.comment = comment;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
     }
 
     @Override

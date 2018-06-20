@@ -84,4 +84,6 @@ public class SurveyManipulationService {
         surveyRepo.deleteAll();
         LOGGER.info(String.format("All surveys deleted by [%s]", SecurityHelper.getUserName()));
     }
+
+
 }
