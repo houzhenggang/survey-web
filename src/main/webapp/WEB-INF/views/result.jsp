@@ -36,8 +36,13 @@
                                    disabled
                                    class="custom-control-input">
                             <label class="custom-control-label" for="${answer.getChoice().getId()}">
-                                    ${answer.getChoice().getContent()} - ${answer.getPercentageAsInt()}%
+                                ${answer.getChoice().getContent()}
                             </label>
+                            <div class="progress mt-2 mb-4">
+                                <div class="progress-bar" style="width:${answer.getPercentageAsInt()}%; background:#97c513;">
+                                    <div class="progress-value">${answer.getPercentageAsInt()}%</div>
+                                </div>
+                            </div>
                         </div>
                     </c:forEach>
                 </c:if>
