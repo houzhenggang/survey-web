@@ -19,9 +19,11 @@
 
     <springProfile name="prod">
 
+        <property name="DEV_HOME" value="logs"/>
+
         <appender name="FILE-AUDIT"
                   class="ch.qos.logback.core.rolling.RollingFileAppender">
-            <file>debug.log</file>
+            <file>${DEV_HOME}/debug.log</file>
             <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
                 <Pattern>
                     %d{yyyy-MM-dd HH:mm:ss} - %msg%n
@@ -30,7 +32,7 @@
 
             <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
                 <!-- rollover daily -->
-                <fileNamePattern>archived/debug.%d{yyyy-MM-dd}.%i.log
+                <fileNamePattern>${DEV_HOME}/archived/debug.%d{yyyy-MM-dd}.%i.log
                 </fileNamePattern>
                 <timeBasedFileNamingAndTriggeringPolicy
                         class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
